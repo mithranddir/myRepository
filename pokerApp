@@ -5,22 +5,22 @@ clubs = ('ac', '2c', '3c', '4c', '5c', '6c', '7c', '8c', '9c', '10c', 'jc', 'qc'
 diamonds = ('ad', '2d', '3d', '4d', '5d', '6d', '7d', '8d', '9d', '10d', 'jd', 'qd', 'kd')
 hearts = ('ah', '2h', '3h', '4h', '5h', '6h', '7h', '8h', '9h', '10h', 'jh', 'qh', 'kh')
 
-def high_hand():
+high_hand()
 
-def one_pair():
+one_pair()
 
-def two_pairs():
+two_pairs()
 
-def three_of_a_kind():
+three_of_a_kind()
 
-def straight():
+straight()
 
-def flush():
+flush()
 
-def full_house():
+full_house()
 
-def four_of_a_kind():
+four_of_a_kind()
 
-def straight_flush():
+straight_flush()
 
-def royal_flush():
+royal_flush()
