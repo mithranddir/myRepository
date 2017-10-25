@@ -7,9 +7,20 @@ hearts = ('ah', '2h', '3h', '4h', '5h', '6h', '7h', '8h', '9h', '10h', 'jh', 'qh
 
 
 
+myFirstCard = 
+mySecondCard = 
+firstCardOnTheTable = 
+secondCardOnTheTable = 
+thirdCardOnTheTable = 
+fourthCardOnTheTable = 
+fifthCardOnTheTable = 
+
+
+
 class Calculation():
 
-    def __init__(self, myFirstCard, mySecondCard, firstCardOnTheTable, secondCardOnTheTable, thirdCardOnTheTable, fourthCardOnTheTable, fifthCardOnTheTable)
+    def __init__(self):
+        
         
         
     def high_hand()
