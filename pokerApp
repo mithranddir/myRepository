@@ -1,92 +1,8 @@
-"""
-
-
-
-Let us work on  a few examples based on combination probability.
-
-Example 1 : -
-A bag contains 9 white and 6 black balls.  What is the probability of selecting 
-(i) 2 white balls
-(ii) 3 white balls
-(iii) 4 black balls
-(iv) 1 white and 3 black balls
-(v) 4 white and 5 black balls
-Solution: -
-We know that the combination formula for selecting r items from n is 
-nCr= n!/r!(n-r)!
-Also we know that probability of an event A is 
-P(A) = Number of favorable outcomes/ Total number of outcomes
-(i) We have to find the probability of selecting 2 white balls.
-So favorable cases will be obtained when we select 2 balls from 9 white balls.  This can be done in 9C2 ways.
-Since there are 9 + 6 = 15 balls, the total number of outcomes will be obtained by selecting 2 balls from the 15 balls.  This can be done in 15C2 ways.
-So the required probability is 9C2/15C2
-(ii)We have to find the probability of selecting 3 white balls.
-So favorable cases will be obtained when we select 3 balls from 9 white balls.  This can be done in 9C3 ways.
-Since there are 9 + 6 = 15 balls, the total number of outcomes will be obtained by selecting 3 balls from the 15 balls.  This can be done in 15C3 ways.
-So the required probability is 9C3/15C3
-(iii) We have to find the probability of selecting 4 blackballs.
-So favorable cases will be obtained when we select 4 balls from 6 black balls.  This can be done in 6C4 ways.
-Since there are 9 + 6 = 15 balls, the total number of outcomes will be obtained by selecting 4 balls from the 15 balls.  This can be done in 15C4 ways.
-So the required probability is 6C4/15C4
-(iv) We have to find the probability of selecting 1 white and  3 black balls.
-So favorable cases will be obtained when we select 1 white from the 9 white balls and 3 black balls from the 6 black balls.  This can be done in 9C1 x 6C3 ways.
-Since there are 9 + 6 = 15 balls, the total number of outcomes will be obtained by selecting 4 balls from the 15 balls.  This can be done in 15C4 ways.
-So the required probability is 9C1 x 6C3 /15C4
-(v) We have to find the probability of selecting 4 white and  5 black balls.
-So favorable cases will be obtained when we select 4 white from the 9 white balls and 3 black balls from the 5 black balls.  This can be done in 9C4 x 6C5 ways.
-Since there are 9 + 6 = 15 balls, the total number of outcomes will be obtained by selecting 9 balls from the 15 balls.  This can be done in 15C9 ways.
-So the required probability is 9C4 x 6C5 /15C9
-Example 2: -
-There are 4 men and 5 women.  Find the probability of selecting 3 of which
-(i) exactly two are women
-(ii) no woman
-(iii) at least one women
-(iv) at most one women
-(v) no men
-Solution: -
-We know that the combination formula for selecting r items from n is 
-nCr= n!/r!(n-r)!
-Also we know that probability of an event A is 
-P(A) = Number of favorable outcomes/ Total number of outcomes
-(i) We have to find the probability of selecting exactly two women.
-Since we have to select three people, exactly two women means two women and one man
-So favorable cases will be obtained when we select 2 women from the 5 women and 1 man from the 4 men.  This can be done in 5C2 x 4C1 ways.
-Since there are 4 + 5 = 9 people, the total number of outcomes will be obtained by selecting 3 people from the 9 people.  This can be done in 9C3 ways.
-So the required probability is 5C2 x 4C1/9C3
-(ii) We have to find the probability of selecting no woman.
-Since we have to select three people, no woman means all three are men.
-So favorable cases will be obtained when we select 3 men from the 4 men.  This can be done in  4C3 ways.
-Since there are 4 + 5 = 9 people, the total number of outcomes will be obtained by selecting 3 people from the 9 people.  This can be done in 9C3 ways.
-So the required probability is  4C3/9C3
-(iii) We have to find the probability of selecting at least one woman.
-Since we have to select three people, at least one women means 1 women or 2 women or 3 women.  That is 1 woman and 2 men or 2 women and 1 man or all three woman.
-So favorable cases will be 5C1 x 4C2 + 5C2 x 4C1 + 5C3 ways.
-Since there are 4 + 5 = 9 people, the total number of outcomes will be obtained by selecting 3 people from the 9 people.  This can be done in 9C3 ways.
-So the required probability is (5C1 x 4C2 + 5C2 x 4C1 + 5C3)/9C3
-(iv) We have to find the probability of selecting at most one woman.
-Since we have to select three people, at most one women means 0 women or 1 women.  That is 0 woman and 3 men or 1 woman and 2 men.
-So favorable cases will be  4C3 + 5C1 x 4C2 ways.
-Since there are 4 + 5 = 9 people, the total number of outcomes will be obtained by selecting 3 people from the 9 people.  This can be done in 9C3 ways.
-So the required probability is (4C3 + 5C1 x 4C2 )/9C3
-(ii) We have to find the probability of selecting no men.
-Since we have to select three people, no men means all three are women.
-So favorable cases will be obtained when we select 3 women from the 5 women.  This can be done in  5C3 ways.
-Since there are 4 + 5 = 9 people, the total number of outcomes will be obtained by selecting 3 people from the 9 people.  This can be done in 9C3 ways.
-So the required probability is  5C3/9C3
-
-
-
-
-"""
-
 #deckOfCards = (spades, clubs, diamonds, hearts)
-
 #spades = ('as', '2s', '3s', '4s', '5s', '6s', '7s', '8s', '9s', '10s', 'js', 'qs', 'ks')
 #clubs = ('ac', '2c', '3c', '4c', '5c', '6c', '7c', '8c', '9c', '10c', 'jc', 'qc', 'kc')
 #diamonds = ('ad', '2d', '3d', '4d', '5d', '6d', '7d', '8d', '9d', '10d', 'jd', 'qd', 'kd')
 #hearts = ('ah', '2h', '3h', '4h', '5h', '6h', '7h', '8h', '9h', '10h', 'jh', 'qh', 'kh')
-
-
 
 #myFirstCard = (raw_input('Input the first card on hand.'))
 #mySecondCard = (raw_input('Input the second card on hand.'))
@@ -95,7 +11,6 @@ So the required probability is  5C3/9C3
 #thirdCardOnTheTable = (raw_input('Input the third card on hand.'))
 #fourthCardOnTheTable = (raw_input('Input the fourth card on hand.'))
 #fifthCardOnTheTable = (raw_input('Input the fifth card on hand.'))
-
 
 class Combination():
 
@@ -106,6 +21,7 @@ class Combination():
         self.diamonds = ('ad', '2d', '3d', '4d', '5d', '6d', '7d', '8d', '9d', '10d', 'jd', 'qd', 'kd')
         self.hearts = ('ah', '2h', '3h', '4h', '5h', '6h', '7h', '8h', '9h', '10h', 'jh', 'qh', 'kh')
 
+
     #n!
     #finding factorinal of number n
     def factorial(self, n):
@@ -114,15 +30,16 @@ class Combination():
         else:
             return n*factorial(n-1)
         
-    #P(A)
-    #probability of event A
-    def probability_of_one_event(self):
-        return numberOfFavorableOutcomes/totalNumberOfOutcomes
-
     #nCr = n!/r!(n-r)!
     #combination is the number ways of selecting r items from a list of n
     def probability_of_a_combination(self):
         return factorial(allItems)/(factorial(selectedItems)*factorial(allItems-selectedItems))
+
+    #P(A)
+    #probability of event A
+    def probability_of_one_event(self):
+        return numberOfFavorableOutcomes/self.deckOfCards
+
 
 
 
@@ -157,3 +74,6 @@ class StraightFlush(Combination):
 
 class RoyalFlush(Combination):
     def __init__(self):
+
+
+print deckOfCards
