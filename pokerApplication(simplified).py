@@ -7,12 +7,15 @@ suits = (spades, clubs, diamonds, hearts)
 allCards = (spades + clubs + diamonds + hearts)
 
 
-quantityOfCardsToBeOnHand = input('How many cards must be on hand?')
-quantityOfCardsToBeOnTheTable = input('How many cards must be on the table?')
+quantityOfPlayers = input('How many players are playing?')
+
+
+quantityOfCardsToBeOnHand = input('How many cards MUST be on hand?')
+quantityOfCardsToBeOnTheTable = input('How many cards MUST be on the table?')
 quantityOfCardsToBeAvailable = quantityOfCardsToBeOnHand + quantityOfCardsToBeOnTheTable
 
-quantityOfCardsOnHand = input('How many cards are on hand?')
-quantityOfCardsOnTheTable = input('How many cards are on the table?')
+quantityOfCardsOnHand = input('How many cards ARE on hand?')
+quantityOfCardsOnTheTable = input('How many cards ARE on the table?')
 quantityOfAvailableCards = quantityOfCardsOnHand + quantityOfCardsOnTheTable
 
 
@@ -36,9 +39,7 @@ def cards_on_the_table():
     return cardsOnTheTable
 
 
-cardsOnHand = cards_on_hand()
-cardsOnTheTable = cards_on_the_table()
-availableCards = cardsOnHand + cardsOnTheTable
+availableCards = cards_on_hand() + cards_on_the_table()
 
 
 #finding factorial of number n
@@ -56,7 +57,8 @@ def factorial(n):
 #n = allItems
 #r = selectedItems
 def probability_of_a_combination(allItems, selectedItems):
-    return factorial(allItems) / (factorial(selectedItems) * factorial((allItems) - (selectedItems)))
+    return factorial(allItems) / (factorial(selectedItems) * factorial(allItems - selectedItems))
+
 
 #(5C2 * 4C1)/9C3
 #9C3 = total_number_of_outcomes
@@ -66,10 +68,6 @@ def total_number_of_outcomes():
 
 #(5C2 * 4C1)/9C3
 #(5C2 * 4C1) = number_of_favorable_outcomes
-def high_hand():
-    pass
-
-
 def one_pair():
     return probability_of_a_combination() * 13
 
@@ -110,5 +108,7 @@ def royal_flush():
 #(5C2 * 4C1)/9C3 = probability_of_combination
 #(5C2 * 4C1) = number_of_favorable_outcomes
 #9C3 = total_number_of_outcomes
-def probability_of_combination(numberOfFavorableOutcomes):
+def probability_of_the_combination(numberOfFavorableOutcomes):
     return numberOfFavorableOutcomes / total_number_of_outcomes()
+
+print probability_of_the_combination(three_of_a_kind())
