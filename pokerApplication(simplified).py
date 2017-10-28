@@ -1,7 +1,7 @@
-spades = ('as', '2s', '3s', '4s', '5s', '6s', '7s', '8s', '9s', '10s', 'js', 'qs', 'ks')
-clubs = ('ac', '2c', '3c', '4c', '5c', '6c', '7c', '8c', '9c', '10c', 'jc', 'qc', 'kc')
-diamonds = ('ad', '2d', '3d', '4d', '5d', '6d', '7d', '8d', '9d', '10d', 'jd', 'qd', 'kd')
-hearts = ('ah', '2h', '3h', '4h', '5h', '6h', '7h', '8h', '9h', '10h', 'jh', 'qh', 'kh')
+spades = ('2s', '3s', '4s', '5s', '6s', '7s', '8s', '9s', '10s', 'js', 'qs', 'ks', 'as')
+clubs = ('2c', '3c', '4c', '5c', '6c', '7c', '8c', '9c', '10c', 'jc', 'qc', 'kc', 'ac')
+diamonds = ('2d', '3d', '4d', '5d', '6d', '7d', '8d', '9d', '10d', 'jd', 'qd', 'kd', 'ad')
+hearts = ('2h', '3h', '4h', '5h', '6h', '7h', '8h', '9h', '10h', 'jh', 'qh', 'kh', 'ah')
 
 suits = (spades, clubs, diamonds, hearts)
 allCards = (spades + clubs + diamonds + hearts)
@@ -66,42 +66,56 @@ def total_number_of_outcomes():
     return probability_of_a_combination(len(allCards), quantityOfCardsToBeAvailable)
 
 
+def high_hand():
+    pass
+
+
 #(5C2 * 4C1)/9C3
 #(5C2 * 4C1) = number_of_favorable_outcomes
 def one_pair():
-    return probability_of_a_combination() * 13
+    pass
 
 
 def two_pairs():
-    return one_pair() * one_pair()
+    pass
 
 
 def three_of_a_kind():
-    return probability_of_a_combination(4, 3) * 13
+    combinationLength = 3
+    a = probability_of_a_combination(len(suits[0]), 1)
+    b = probability_of_a_combination(len(suits), combinationLength)
+    c = probability_of_a_combination(12, 2)
+    d = probability_of_a_combination(len(suits), 1)
 
 
 def straight():
-    pass
+    combinationLength = 5
+    a = probability_of_a_combination(len(suits), 1)
+    return 10 * a * a * a * a * a
 
 
 def flush():
-    pass
+    combinationLength = 5
+    return probability_of_a_combination(len(suits), 1) * (probability_of_a_combination(len(suits[0]), combinationLength) - 10)
 
 
 def full_house():
-    return one_pair() * three_of_a_kind()
+    pass
 
 
 def four_of_a_kind():
-    return probability_of_a_combination(4, 4) * 13
+    combinationLength = 4
+    return probability_of_a_combination(len(suits[0]), 1) * probability_of_a_combination(len(suits), combinationLength) * probability_of_a_combination((len(allCards) - len(suits), 1))
 
 
 def straight_flush():
-    pass
+    combinationLength = 5
+    return probability_of_a_combination(len(suits), 1) * (len(suits[0]) - (combinationLength + 1))
 
 
 def royal_flush():
-    pass
+    combinationLength = 5
+    return probability_of_a_combination(len(suits), 1)
 
 
 #P(A)
@@ -111,4 +125,3 @@ def royal_flush():
 def probability_of_the_combination(numberOfFavorableOutcomes):
     return numberOfFavorableOutcomes / total_number_of_outcomes()
 
-print probability_of_the_combination(three_of_a_kind())
