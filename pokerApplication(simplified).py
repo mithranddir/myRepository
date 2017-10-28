@@ -38,6 +38,17 @@ cardsOnTheTable = cards_on_the_table()
 availableCards = [cardsOnHand, cardsOnTheTable]
 
 
+#additional functions
+def length_of_the_smallest_array_in_matrix(matrix):
+    theList = []
+    matrixLength = 0
+    while matrixLength < len(matrix):
+        lengthOfListInMatrix = len(matrix[matrixLength])
+        theList.append(lengthOfListInMatrix)
+        matrixLength += 1
+    return min(theList)
+
+
 #finding factorial of number n
 #n! = 1*2*3*...*n
 def factorial(n):
@@ -71,6 +82,8 @@ def high_hand():
 
 
 def one_pair():
+    allItems =
+    selectedItems =
     lengthOfAllSuits = len(deckOfCards[0 and 1 and 2 and 3])
     return probability_of_a_combination(4, 2) * lengthOfAllSuits
 
