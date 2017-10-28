@@ -1,9 +1,19 @@
+spades = ('as', '2s', '3s', '4s', '5s', '6s', '7s', '8s', '9s', '10s', 'js', 'qs', 'ks')
+clubs = ('ac', '2c', '3c', '4c', '5c', '6c', '7c', '8c', '9c', '10c', 'jc', 'qc', 'kc')
+diamonds = ('ad', '2d', '3d', '4d', '5d', '6d', '7d', '8d', '9d', '10d', 'jd', 'qd', 'kd')
+hearts = ('ah', '2h', '3h', '4h', '5h', '6h', '7h', '8h', '9h', '10h', 'jh', 'qh', 'kh')
+
+suits = (spades, clubs, diamonds, hearts)
+allCards = (spades + clubs + diamonds + hearts)
 
 
-quantityOfPlayers = input('How many players are playing?')
+quantityOfCardsToBeOnHand = input('How many cards must be on hand?')
+quantityOfCardsToBeOnTheTable = input('How many cards must be on the table?')
+quantityOfCardsToBeAvailable = quantityOfCardsToBeOnHand + quantityOfCardsToBeOnTheTable
 
-quantityOfCardsOnHand = input('How many cards on hand?')
-quantityOfCardsOnTheTable = input('How many cards on the table?')
+quantityOfCardsOnHand = input('How many cards are on hand?')
+quantityOfCardsOnTheTable = input('How many cards are on the table?')
+quantityOfAvailableCards = quantityOfCardsOnHand + quantityOfCardsOnTheTable
 
 
 def cards_on_hand():
@@ -16,7 +26,6 @@ def cards_on_hand():
     return cardsOnHand
 
 
-
 def cards_on_the_table():
     comparisonElement = 1
     cardsOnTheTable = []
@@ -27,26 +36,9 @@ def cards_on_the_table():
     return cardsOnTheTable
 
 
-spades = ('as', '2s', '3s', '4s', '5s', '6s', '7s', '8s', '9s', '10s', 'js', 'qs', 'ks')
-clubs = ('ac', '2c', '3c', '4c', '5c', '6c', '7c', '8c', '9c', '10c', 'jc', 'qc', 'kc')
-diamonds = ('ad', '2d', '3d', '4d', '5d', '6d', '7d', '8d', '9d', '10d', 'jd', 'qd', 'kd')
-hearts = ('ah', '2h', '3h', '4h', '5h', '6h', '7h', '8h', '9h', '10h', 'jh', 'qh', 'kh')
-
-deckOfCards = (spades, clubs, diamonds, hearts)
 cardsOnHand = cards_on_hand()
 cardsOnTheTable = cards_on_the_table()
-availableCards = [cardsOnHand, cardsOnTheTable]
-
-
-#additional functions
-def length_of_the_smallest_array_in_matrix(matrix):
-    theList = []
-    matrixLength = 0
-    while matrixLength < len(matrix):
-        lengthOfListInMatrix = len(matrix[matrixLength])
-        theList.append(lengthOfListInMatrix)
-        matrixLength += 1
-    return min(theList)
+availableCards = cardsOnHand + cardsOnTheTable
 
 
 #finding factorial of number n
@@ -64,15 +56,12 @@ def factorial(n):
 #n = allItems
 #r = selectedItems
 def probability_of_a_combination(allItems, selectedItems):
-    allItems = len(allItems)
-    selectedItems = len(selectedItems)
-    return factorial(allItems) / (factorial(selectedItems) * (factorial(allItems) - factorial(selectedItems)))
-
+    return factorial(allItems) / (factorial(selectedItems) * factorial((allItems) - (selectedItems)))
 
 #(5C2 * 4C1)/9C3
 #9C3 = total_number_of_outcomes
 def total_number_of_outcomes():
-    return probability_of_a_combination(deckOfCards, availableCards)
+    return probability_of_a_combination(len(allCards), quantityOfCardsToBeAvailable)
 
 
 #(5C2 * 4C1)/9C3
@@ -82,14 +71,11 @@ def high_hand():
 
 
 def one_pair():
-    allItems =
-    selectedItems =
-    lengthOfAllSuits = len(deckOfCards[0 and 1 and 2 and 3])
-    return probability_of_a_combination(4, 2) * lengthOfAllSuits
+    return probability_of_a_combination() * 13
 
 
 def two_pairs():
-    return (probability_of_a_combination(4, 2) * 13) * (probability_of_a_combination(4, 2) * 13)
+    return one_pair() * one_pair()
 
 
 def three_of_a_kind():
@@ -105,7 +91,7 @@ def flush():
 
 
 def full_house():
-    return (probability_of_a_combination(4, 2) * 13) * (probability_of_a_combination(4, 3) * 13)
+    return one_pair() * three_of_a_kind()
 
 
 def four_of_a_kind():
