@@ -13,7 +13,8 @@ class Combination():
 
     #finding factorial of number n
     #n! = 1*2*3*...*n
-    def factorial(self, n):
+    @staticmethod
+    def factorial(n):
         if n == 0:
             return 1
         else:
@@ -24,7 +25,8 @@ class Combination():
     #nCr= n!/r!(n-r)! = probability_of_a_combination
     #n = allItems
     #r = selectedItems
-    def probability_of_a_combination(self, allItems, selectedItems):
+    @staticmethod
+    def probability_of_a_combination(allItems, selectedItems):
         allItems = len(allItems)
         selectedItems = len(selectedItems)
         return Combination.factorial(allItems) / (Combination.factorial(selectedItems) * (Combination.factorial(allItems) - Combination.factorial(selectedItems)))
@@ -33,70 +35,60 @@ class Combination():
     #(5C2 * 4C1)/9C3
     #(5C2 * 4C1) = number_of_favorable_outcomes
     def number_of_favorable_outcomes(self):
-        pass
+        raise NotImplemented
 
     #(5C2 * 4C1)/9C3
     #9C3 = total_number_of_outcomes
     def total_number_of_outcomes(self):
-        retutn Combination.probability_of_a_combination(Combination.deckOfCards, Combination.availableCards)
+        return Combination.probability_of_a_combination(self.deckOfCards, self.availableCards)
 
-
-    #P(A)
-    #(5C2 * 4C1)/9C3 = probability_of_combination
-    #(5C2 * 4C1) = number_of_favorable_outcomes
-    #9C3 = total_number_of_outcomes
+        #P(A)
+        #(5C2 * 4C1)/9C3 = probability_of_combination
+        #(5C2 * 4C1) = number_of_favorable_outcomes
+        #9C3 = total_number_of_outcomes
     def probability_of_combination(self):
         return Combination.number_of_favorable_outcomes() / Combination.total_number_of_outcomes()
 
 
 class HighHand(Combination):
-    def __init__(self):
-
+    pass
 
 class OnePair(Combination):
+    def __init__(self):
+        super(OnePair, self).__init__()
+
     def number_of_favorable_outcomes(self):
-        for comparisonElement in range(0, 13):
-            pass
-        for elementInSpades in self.spades:
-            pass
-        for elementInClubs in self.clubs:
-            pass
-        for elementInDiamonds in self.diamonds:
-            pass
-        for elementInDiamonds in self.diamonds:
-            pass
         return Combination.probability_of_a_combination()
 
 
 class TwoPairs(Combination):
-    def __init__(self):
+    pass
 
 
 class ThreeOfAKind(Combination):
-    def __init__(self):
+    pass
 
 
 class Straight(Combination):
-    def __init__(self):
+    pass
 
 
 class Flush(Combination):
-    def __init__(self):
+    pass
 
 
 class FullHouse(Combination):
-    def __init__(self):
+    pass
 
 
 class FourOfAKind(Combination):
-    def __init__(self):
+    pass
 
 
 class StraightFlush(Combination):
-    def __init__(self):
+    pass
 
 
 class RoyalFlush(Combination):
-    def __init__(self):
-
+    pass
 
