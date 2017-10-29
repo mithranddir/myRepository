@@ -14,14 +14,11 @@ quantityOfCardsToBeOnHand = input('How many cards MUST be on hand?')
 quantityOfCardsToBeOnTheTable = input('How many cards MUST be on the table?')
 quantityOfCardsToBeAvailable = quantityOfCardsToBeOnHand + quantityOfCardsToBeOnTheTable
 
-quantityOfCardsOnHand = input('How many cards ARE on hand?')
-quantityOfCardsOnTheTable = input('How many cards ARE on the table?')
-quantityOfAvailableCards = quantityOfCardsOnHand + quantityOfCardsOnTheTable
-
 
 def cards_on_hand():
     comparisonElement = 1
     cardsOnHand = []
+    quantityOfCardsOnHand = input('How many cards ARE on hand?')
     while quantityOfCardsOnHand >= comparisonElement:
         card = raw_input('Input card on hand #{}'.format(comparisonElement))
         cardsOnHand.append(card)
@@ -32,6 +29,7 @@ def cards_on_hand():
 def cards_on_the_table():
     comparisonElement = 1
     cardsOnTheTable = []
+    quantityOfCardsOnTheTable = input('How many cards ARE on the table?')
     while quantityOfCardsOnHand >= comparisonElement:
         card = raw_input('Input card the table #{}'.format(comparisonElement))
         cardsOnTheTable.append(card)
@@ -40,6 +38,7 @@ def cards_on_the_table():
 
 
 availableCards = cards_on_hand() + cards_on_the_table()
+quantityOfAvailableCards = len(availableCards)
 
 
 #finding factorial of number n
@@ -66,12 +65,12 @@ def total_number_of_outcomes():
     return probability_of_a_combination(len(allCards), quantityOfCardsToBeAvailable)
 
 
+#(5C2 * 4C1)/9C3
+#(5C2 * 4C1) = number_of_favorable_outcomes
 def high_hand():
     pass
 
 
-#(5C2 * 4C1)/9C3
-#(5C2 * 4C1) = number_of_favorable_outcomes
 def one_pair():
     pass
 
