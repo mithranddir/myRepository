@@ -1,10 +1,14 @@
-spades = ('2s', '3s', '4s', '5s', '6s', '7s', '8s', '9s', '10s', 'js', 'qs', 'ks', 'as')
-clubs = ('2c', '3c', '4c', '5c', '6c', '7c', '8c', '9c', '10c', 'jc', 'qc', 'kc', 'ac')
-diamonds = ('2d', '3d', '4d', '5d', '6d', '7d', '8d', '9d', '10d', 'jd', 'qd', 'kd', 'ad')
-hearts = ('2h', '3h', '4h', '5h', '6h', '7h', '8h', '9h', '10h', 'jh', 'qh', 'kh', 'ah')
+spades = ('as', 'ks', 'qs', 'js', '10s', '9s', '8s', '7s', '6s', '5s', '4s', '3s', '2s')
+clubs = ('ac', 'kc', 'qc', 'jc', '10c', '9c', '8c', '7c', '6c', '5c', '4c', '3c', '2c')
+diamonds = ('ad', 'kd', 'qd', 'jd', '10d', '9d', '8d', '7d', '6d', '5d', '4d', '3d', '2d')
+hearts = ('ah', 'kh', 'qh', 'jh', '10h', '9h', '8h', '7h', '6h', '5h', '4h', '3h', '2h')
 
 suits = (spades, clubs, diamonds, hearts)
 allCards = (spades + clubs + diamonds + hearts)
+
+for suit in suits:
+    suitLength = len(suit)
+    highestSuitIndex = suitLength - 1
 
 
 quantityOfPlayers = input('How many players are playing?')
@@ -30,7 +34,7 @@ def cards_on_the_table():
     comparisonElement = 1
     cardsOnTheTable = []
     quantityOfCardsOnTheTable = input('How many cards ARE on the table?')
-    while quantityOfCardsOnHand >= comparisonElement:
+    while quantityOfCardsOnTheTable >= comparisonElement:
         card = raw_input('Input card the table #{}'.format(comparisonElement))
         cardsOnTheTable.append(card)
         comparisonElement += 1
@@ -57,12 +61,6 @@ def factorial(n):
 #r = selectedItems
 def probability_of_a_combination(allItems, selectedItems):
     return factorial(allItems) / (factorial(selectedItems) * factorial(allItems - selectedItems))
-
-
-#(5C2 * 4C1)/9C3
-#9C3 = total_number_of_outcomes
-def total_number_of_outcomes():
-    return probability_of_a_combination(len(allCards), quantityOfCardsToBeAvailable)
 
 
 #(5C2 * 4C1)/9C3
@@ -113,8 +111,22 @@ def straight_flush():
 
 
 def royal_flush():
-    combinationLength = 5
-    return probability_of_a_combination(len(suits), 1)
+#    combinationLength = 5
+#    comparisonElement = 1
+#    comparisonIndex = 0
+#    royalFlush = []
+#    for suit in suits:
+#        suitLength = len(suit)
+#    while combinationLength >= comparisonElement:
+#        royalFlush[]
+#    return probability_of_a_combination(len(suits), 1)
+    pass
+
+
+#(5C2 * 4C1)/9C3
+#9C3 = total_number_of_outcomes
+def total_number_of_outcomes():
+    return probability_of_a_combination(len(allCards), quantityOfCardsToBeAvailable)
 
 
 #P(A)
