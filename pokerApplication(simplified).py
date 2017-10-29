@@ -63,6 +63,14 @@ def probability_of_a_combination(allItems, selectedItems):
     return factorial(allItems) / (factorial(selectedItems) * factorial(allItems - selectedItems))
 
 
+def combination_quantity_in_cards_to_be_available(combinationLength, combinationQuantityInAllCards):
+    if (quantityOfCardsToBeAvailable % combinationLength) > combinationQuantityInAllCards:
+        combinationQuantityInCardsToBeAvailable = combinationQuantityInAllCards
+    elif (quantityOfCardsToBeAvailable % combinationLength) > combinationQuantityInAllCards:
+        combinationQuantityInCardsToBeAvailable = quantityOfCardsToBeAvailable % combinationLength
+    return combinationQuantityInCardsToBeAvailable
+
+
 #(5C2 * 4C1)/9C3
 #(5C2 * 4C1) = number_of_favorable_outcomes
 def high_hand():
@@ -111,15 +119,6 @@ def straight_flush():
 
 
 def royal_flush():
-#    combinationLength = 5
-#    comparisonElement = 1
-#    comparisonIndex = 0
-#    royalFlush = []
-#    for suit in suits:
-#        suitLength = len(suit)
-#    while combinationLength >= comparisonElement:
-#        royalFlush[]
-#    return probability_of_a_combination(len(suits), 1)
     pass
 
 
