@@ -6,27 +6,22 @@ hearts = ('ah', 'kh', 'qh', 'jh', '10h', '9h', '8h', '7h', '6h', '5h', '4h', '3h
 suits = (spades, clubs, diamonds, hearts)
 allCards = (spades + clubs + diamonds + hearts)
 
-for suit in suits:
-    pass
-print suit
-
 
 
 def royal_flush_constructor():
     combinationLength = 5
-    comparisonElement= 1
     comparisonIndex = 0
+    comparisonElement= 1
     royalFlush = []
+    royalFlushSuit = []
     while len(suits) >= comparisonElement:
-        comparisonIndex = 0
-        comparisonElement = 1
-        royalFlushSuit = []
-        while combinationLength >= comparisonElement:
-            royalFlushSuit.append(suit[comparisonIndex])
-            comparisonElement += 1
-            comparisonIndex += 1
-            return royalFlushSuit
-        royalFlush.append(royalFlushSuit)
+        comparisonIndexSuit = 0
+        comparisonElementSuit = 1
+        while combinationLength >= comparisonElementSuit:
+            royalFlushSuit.append(suits[comparisonIndexSuit])
+            comparisonElementSuit += 1
+            comparisonIndexSuit += 1
+            royalFlush.append(royalFlushSuit)
         comparisonElement += 1
         comparisonIndex += 1
     return royalFlush

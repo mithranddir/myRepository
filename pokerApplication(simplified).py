@@ -73,52 +73,83 @@ def combination_quantity_in_cards_to_be_available(combinationLength, combination
 
 #(5C2 * 4C1)/9C3
 #(5C2 * 4C1) = number_of_favorable_outcomes
-def high_hand():
+def constructor_of_high_hand():
     pass
 
 
-def one_pair():
+def posibility_of_high_hand():
     pass
 
 
-def two_pairs():
+def constructor_of_one_pair():
     pass
 
 
-def three_of_a_kind():
-    combinationLength = 3
-    a = probability_of_a_combination(len(suits[0]), 1)
-    b = probability_of_a_combination(len(suits), combinationLength)
-    c = probability_of_a_combination(12, 2)
-    d = probability_of_a_combination(len(suits), 1)
-
-
-def straight():
-    combinationLength = 5
-    a = probability_of_a_combination(len(suits), 1)
-    return 10 * a * a * a * a * a
-
-
-def flush():
-    combinationLength = 5
-    return probability_of_a_combination(len(suits), 1) * (probability_of_a_combination(len(suits[0]), combinationLength) - 10)
-
-
-def full_house():
+def posibility_of_one_pair():
     pass
 
 
-def four_of_a_kind():
-    combinationLength = 4
-    return probability_of_a_combination(len(suits[0]), 1) * probability_of_a_combination(len(suits), combinationLength) * probability_of_a_combination((len(allCards) - len(suits), 1))
+def constructor_of_two_pairs():
+    pass
 
 
-def straight_flush():
-    combinationLength = 5
-    return probability_of_a_combination(len(suits), 1) * (len(suits[0]) - (combinationLength + 1))
+def posibility_of_two_pairs():
+    pass
 
 
-def royal_flush():
+def constructor_of_three_of_a_kind():
+    pass
+
+
+def posibility_of_three_of_a_kind():
+    pass
+
+
+def constructor_of_straight():
+    pass
+
+
+def posibility_of_straight():
+    pass
+
+
+def constructor_of_flush():
+    pass
+
+
+def posibility_of_flush():
+    pass
+
+
+def constructor_of_full_house():
+    pass
+
+
+def posibility_of_full_house():
+    pass
+
+
+def constructor_of_four_of_a_kind():
+    pass
+
+
+def posibility_of_four_of_a_kind():
+    pass
+
+
+def constructor_of_straight_flush():
+    pass
+
+
+def posibility_of_straight_flush():
+    pass
+
+
+def constructor_of_royal_flush():
+    pass
+
+
+def posibility_of_royal_flush():
     pass
 
 
