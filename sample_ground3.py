@@ -6,28 +6,19 @@ hearts = ('ah', 'kh', 'qh', 'jh', '10h', '9h', '8h', '7h', '6h', '5h', '4h', '3h
 suits = (spades, clubs, diamonds, hearts)
 allCards = (spades + clubs + diamonds + hearts)
 
+availableCards = ['as', 'ks', 'qs', 'js', '10s']
+
+aCombination = ['ks', 'qs', 'js', '10s', '9s']
 
 
-def royal_flush_constructor():
-    combinationLength = 5
+def missing_cards(aCombination):
     comparisonIndex = 0
-    comparisonElement= 1
-    royalFlush = []
-    royalFlushSuit = []
-    while len(suits) >= comparisonElement:
-        comparisonIndexSuit = 0
-        comparisonElementSuit = 1
-        while combinationLength >= comparisonElementSuit:
-            royalFlushSuit.append(suits[comparisonIndexSuit])
-            comparisonElementSuit += 1
-            comparisonIndexSuit += 1
-            royalFlush.append(royalFlushSuit)
-        comparisonElement += 1
+    comparisonElement = 1
+    comparisonList = []
+    missingCards = []
+    while len(aCombination) >= comparisonElement:
+        aCombination[comparisonIndex]
+
         comparisonIndex += 1
-    return royalFlush
-print royal_flush_constructor()
-
-
-#    royalFlushQuantity = 'how many royal flushes can fit in cardsToBeAvailable'
-#    royalFlushInAll = 'how many royal flushes can fit in allCards'
-#    return probability_of_a_combination(royalFlushInAll, royalFlushInOutcome)
+        comparisonElement += 1
+        return missingCards
