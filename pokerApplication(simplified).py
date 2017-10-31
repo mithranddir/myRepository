@@ -155,10 +155,10 @@ twoSevens = [['7s', '7c'], ['7d', '7h'], ['7s', '7h'], ['7c', '7d'], ['7s', '7d'
 twoSixes = [['6s', '6c'], ['6d', '6h'], ['6s', '6h'], ['6c', '6d'], ['6s', '6d'], ['6c' '6h']]
 twoFives = [['5s', '5c'], ['5d', '5h'], ['5s', '5h'], ['5c', '5d'], ['5s', '5d'], ['5c' '5h']]
 twoFours = [['4s', '4c'], ['4d', '4h'], ['4s', '4h'], ['4c', '4d'], ['4s', '4d'], ['4c' '4h']]
-twoTrees = [['3s', '3c'], ['3d', '3h'], ['3s', '3h'], ['3c', '3d'], ['3s', '3d'], ['3c' '3h']]
+twoThrees = [['3s', '3c'], ['3d', '3h'], ['3s', '3h'], ['3c', '3d'], ['3s', '3d'], ['3c' '3h']]
 twoTwos = [['2s', '2c'], ['2d', '2h'], ['2s', '2h'], ['2c', '2d'], ['2s', '2d'], ['2c' '2h']]
 
-onePair = [twoAces + twoKings + twoQueens + twoJacks + twoTens + twoNines + twoEights + twoSevens + twoSixes + twoFives + twoFours + twoTrees + twoTwos]
+onePair = [twoAces + twoKings + twoQueens + twoJacks + twoTens + twoNines + twoEights + twoSevens + twoSixes + twoFives + twoFours + twoThrees + twoTwos]
 
 
 quantityOfPlayers = input('How many players are playing?')
@@ -195,8 +195,6 @@ availableCards = cards_on_hand() + cards_on_the_table()
 quantityOfAvailableCards = len(availableCards)
 
 
-#finding factorial of number n
-#n! = 1*2*3*...*n
 def factorial(n):
     if n == 0:
         return 1
@@ -204,45 +202,56 @@ def factorial(n):
         return n * factorial(n - 1)
 
 
-#combination formula for selecting r items from n is
-#nCr= n!/r!(n-r)!
-#nCr= n!/r!(n-r)! = probability_of_a_combination
-#n = allItems
-#r = selectedItems
 def probability_of_a_combination(allItems, selectedItems):
     return factorial(allItems) / (factorial(selectedItems) * factorial(allItems - selectedItems))
 
 
 def missing_cards(availableCards, aCombination):
-    comparisonList = []
-    for element in availableCards:
-        if element not in aCombination:
-            comparisonList.append(element)
-    return comparisonList
+    missingCards = []
+    for element in aCombination:
+        if element not in availableCards:
+            missingCards.append(element)
+    return missingCards
 
 
-def combination_quantity_in_cards_to_be_available(combinationLength, combinationQuantityInAllCards):
-    if (quantityOfCardsToBeAvailable % combinationLength) > combinationQuantityInAllCards:
-        combinationQuantityInCardsToBeAvailable = combinationQuantityInAllCards
-    elif (quantityOfCardsToBeAvailable % combinationLength) > combinationQuantityInAllCards:
-        combinationQuantityInCardsToBeAvailable = quantityOfCardsToBeAvailable % combinationLength
-    return combinationQuantityInCardsToBeAvailable
+missingCardsInRoyalFlushForUser = missing_cards(availableCards, royalFlush)
+missingCardsInStraightFlushForUser = missing_cards(availableCards, straightFlush)
+missingCardsInFourOfAKindForUser = missing_cards(availableCards, fourOfAKind)
+missingCardsInFullHouseForUser = missing_cards(availableCards, fullHouse)
+missingCardsInFlushForUser = missing_cards(availableCards, flush)
+missingCardsInStraightForUser = missing_cards(availableCards, straight)
+missingCardsInThreeOfAKindForUser = missing_cards(availableCards, threeOfAKind)
+missingCardsInTwoPairsForUser = missing_cards(availableCards, twoPairs)
+missingCardsInOnePairForUser = missing_cards(availableCards, onePair)
+
+missingCardsInRoyalFlushForOpponent = missing_cards(cards_on_the_table(), royalFlush)
+missingCardsInStraightFlushForOpponent = missing_cards(cards_on_the_table(), straightFlush)
+missingCardsInFourOfAKindForOpponent = missing_cards(cards_on_the_table(), fourOfAKind)
+missingCardsInFullHouseForOpponent = missing_cards(cards_on_the_table(), fullHouse)
+missingCardsInFlushForOpponent = missing_cards(cards_on_the_table(), flush)
+missingCardsInStraightForOpponent = missing_cards(cards_on_the_table(), straight)
+missingCardsInThreeOfAKindForOpponent = missing_cards(cards_on_the_table(), threeOfAKind)
+missingCardsInTwoPairsForOpponent = missing_cards(cards_on_the_table(), twoPairs)
+missingCardsInOnePairForOpponent = missing_cards(cards_on_the_table(), onePair)
 
 
-#(5C2 * 4C1)/9C3
-#(5C2 * 4C1) = number_of_favorable_outcomes
+#def combination_quantity_in_cards_to_be_available(combinationLength, combinationQuantityInAllCards):
+#    if (quantityOfCardsToBeAvailable % combinationLength) > combinationQuantityInAllCards:
+#        combinationQuantityInCardsToBeAvailable = combinationQuantityInAllCards
+#    elif (quantityOfCardsToBeAvailable % combinationLength) > combinationQuantityInAllCards:
+#        combinationQuantityInCardsToBeAvailable = quantityOfCardsToBeAvailable % combinationLength
+#    return combinationQuantityInCardsToBeAvailable
 
 
-#(5C2 * 4C1)/9C3
-#9C3 = total_number_of_outcomes
-def total_number_of_outcomes():
-    return probability_of_a_combination(len(allCards), quantityOfCardsToBeAvailable)
+# find probability of selecting missing cards. then multiply'em . then add up all of it. that would be number of favorable outcomes for the combination.
+def probability_of_selection_of_missing_cards(availableCards, missingCards):
+
+    probability_of_a_combination(len(allCards), 1) ** len(missingCards)
 
 
-#P(A)
-#(5C2 * 4C1)/9C3 = probability_of_combination
-#(5C2 * 4C1) = number_of_favorable_outcomes
-#9C3 = total_number_of_outcomes
+totalNumberOfOutcomes = probability_of_a_combination(len(allCards), quantityOfCardsToBeAvailable)
+
+
 def probability_of_the_combination(numberOfFavorableOutcomes):
-    return numberOfFavorableOutcomes / total_number_of_outcomes()
+    return numberOfFavorableOutcomes / totalNumberOfOutcomes
 

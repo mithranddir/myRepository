@@ -11,14 +11,3 @@ availableCards = ['as', 'ks', 'qs', 'js', '10s']
 aCombination = ['ks', 'qs', 'js', '10s', '9s']
 
 
-def missing_cards(aCombination):
-    comparisonIndex = 0
-    comparisonElement = 1
-    comparisonList = []
-    missingCards = []
-    while len(aCombination) >= comparisonElement:
-        aCombination[comparisonIndex]
-
-        comparisonIndex += 1
-        comparisonElement += 1
-        return missingCards
