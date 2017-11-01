@@ -3,8 +3,6 @@ clubs = ('ac', 'kc', 'qc', 'jc', '10c', '9c', '8c', '7c', '6c', '5c', '4c', '3c'
 diamonds = ('ad', 'kd', 'qd', 'jd', '10d', '9d', '8d', '7d', '6d', '5d', '4d', '3d', '2d')
 hearts = ('ah', 'kh', 'qh', 'jh', '10h', '9h', '8h', '7h', '6h', '5h', '4h', '3h', '2h')
 
-suits = (spades, clubs, diamonds, hearts)
-allCards = (spades + clubs + diamonds + hearts)
 
 royalFlushSpades = ['as', 'ks', 'qs', 'js', '10s']
 royalFlushClubs = ['ac', 'kc', 'qc', 'jc', '10c']
@@ -121,6 +119,7 @@ straightHeartsSeven = []
 straightHeartsSix = []
 straightHeartsFive = []
 straightHearts = [straightHeartsKing, straightHeartsQueen, straightHeartsJack, straightHeartsTen, straightHeartsNine, straightHeartsEight, straightHeartsSeven, straightHeartsSix, straightHeartsFive]
+
 straight = [straightSpades + straightClubs + straightDiamonds + straightHearts]
 
 
@@ -161,7 +160,7 @@ twoTwos = [['2s', '2c'], ['2d', '2h'], ['2s', '2h'], ['2c', '2d'], ['2s', '2d'],
 onePair = [twoAces + twoKings + twoQueens + twoJacks + twoTens + twoNines + twoEights + twoSevens + twoSixes + twoFives + twoFours + twoThrees + twoTwos]
 
 
-quantityOfPlayers = input('How many players are playing?')
+allCards = (spades + clubs + diamonds + hearts)
 
 
 quantityOfCardsToBeOnHand = input('How many cards MUST be on hand?')
@@ -185,7 +184,7 @@ def cards_on_the_table():
     cardsOnTheTable = []
     quantityOfCardsOnTheTable = input('How many cards ARE on the table?')
     while quantityOfCardsOnTheTable >= comparisonElement:
-        card = raw_input('Input card the table #{}'.format(comparisonElement))
+        card = raw_input('Input card on the table #{}'.format(comparisonElement))
         cardsOnTheTable.append(card)
         comparisonElement += 1
     return cardsOnTheTable
@@ -194,7 +193,7 @@ def cards_on_the_table():
 availableCards = cards_on_hand() + cards_on_the_table()
 quantityOfAvailableCards = len(availableCards)
 
-
+#not working
 def factorial(n):
     if n == 0:
         return 1
@@ -207,11 +206,14 @@ def probability_of_a_combination(allItems, selectedItems):
 
 
 def missing_cards(availableCards, aCombination):
-    missingCards = []
-    for element in aCombination:
-        if element not in availableCards:
-            missingCards.append(element)
-    return missingCards
+    missingCardsList = []
+    for combinationList in aCombination:
+        missingCards = []
+        for card in combinationList:
+            if card not in availableCards:
+                missingCards.append(card)
+        missingCardsList.append(missingCards)
+    return missingCardsList
 
 
 missingCardsInRoyalFlushForUser = missing_cards(availableCards, royalFlush)
@@ -235,45 +237,33 @@ missingCardsInTwoPairsForOpponent = missing_cards(cards_on_the_table(), twoPairs
 missingCardsInOnePairForOpponent = missing_cards(cards_on_the_table(), onePair)
 
 
-#def combination_quantity_in_cards_to_be_available(combinationLength, combinationQuantityInAllCards):
-#    if (quantityOfCardsToBeAvailable % combinationLength) > combinationQuantityInAllCards:
-#        combinationQuantityInCardsToBeAvailable = combinationQuantityInAllCards
-#    elif (quantityOfCardsToBeAvailable % combinationLength) > combinationQuantityInAllCards:
-#        combinationQuantityInCardsToBeAvailable = quantityOfCardsToBeAvailable % combinationLength
-#    return combinationQuantityInCardsToBeAvailable
+#not working
+def probability_of_missing_cards(quantityOfAvailableCards, missingCards, combinationLength):
+    returnVariable = probability_of_a_combination((quantityOfCardsToBeAvailable - quantityOfAvailableCards), len(missingCardsList))
+    for missingCardsList in missingCards:
+        returnVariable = returnVariable + returnVariable
 
 
-# find probability of selecting missing cards. then multiply'em . then add up all of it. that would be number of favorable outcomes for the combination.
-def probability_of_missing_cards(availableCards, missingCards):
-    if len(missingCards) > 0:
-        probabilityOfMissingCards = probability_of_a_combination(len(allCards), 1) ** len(missingCards)
-    else:
-        probabilityOfMissingCards = 0
+probabilityOfRoyalFlushForUser = probability_of_missing_cards(availableCards, missingCardsInRoyalFlushForUser, len(royalFlush[0]))
+probabilityOfStraightFlushForUser = probability_of_missing_cards(availableCards, missingCardsInStraightFlushForUser, len(straightFlush[0]))
+probabilityOfFourOfAKindForUser = probability_of_missing_cards(availableCards, missingCardsInFourOfAKindForUser, len(fourOfAKind[0]))
+probabilityOfFullHouseForUser = probability_of_missing_cards(availableCards, missingCardsInFullHouseForUser, len(fullHouse[0]))
+probabilityOfFlushForUser = probability_of_missing_cards(availableCards, missingCardsInFlushForUser, len(flush[0]))
+probabilityOfStraightForUser = probability_of_missing_cards(availableCards, missingCardsInStraightForUser, len(straight[0]))
+probabilityOfThreeOfAKindForUser = probability_of_missing_cards(availableCards, missingCardsInThreeOfAKindForUser, len(threeOfAKind[0]))
+probabilityOfTwoPairsForUser = probability_of_missing_cards(availableCards, missingCardsInTwoPairsForUser, len(twoPairs[0]))
+probabilityOfOnePairForUser = probability_of_missing_cards(availableCards, missingCardsInOnePairForUser, len(onePair[0]))
 
-probabilityOfMissingCardsInRoyalFlushForUser = probability_of_missing_cards(availableCards, missingCardsInRoyalFlushForUser)
-probabilityOfMissingCardsInStraightFlushForUser = probability_of_missing_cards(availableCards, missingCardsInStraightFlushForUser)
-probabilityOfMissingCardsInFourOfAKindForUser = probability_of_missing_cards(availableCards, missingCardsInFourOfAKindForUser)
-probabilityOfMissingCardsInFullHouseForUser = probability_of_missing_cards(availableCards, missingCardsInFullHouseForUser)
-probabilityOfMissingCardsInFlushForUser = probability_of_missing_cards(availableCards, missingCardsInFlushForUser)
-probabilityOfMissingCardsInStraightForUser = probability_of_missing_cards(availableCards, missingCardsInStraightForUser)
-probabilityOfMissingCardsInThreeOfAKindForUser = probability_of_missing_cards(availableCards, missingCardsInThreeOfAKindForUser)
-probabilityOfMissingCardsInTwoPairsForUser = probability_of_missing_cards(availableCards, missingCardsInTwoPairsForUser)
-probabilityOfMissingCardsInOnePairForUser = probability_of_missing_cards(availableCards, missingCardsInOnePairForUser)
+probabilityOfRoyalFlushForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInRoyalFlushForOpponent, len(royalFlush[0]))
+probabilityOfStraightFlushForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInStraightFlushForOpponent, len(straightFlush[0]))
+probabilityOfFourOfAKindForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInFourOfAKindForOpponent, len(fourOfAKind[0]))
+probabilityOfFullHouseForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInFullHouseForOpponent, len(fullHouse[0]))
+probabilityOfFlushForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInFlushForOpponent, len(flush[0]))
+probabilityOfStraightForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInStraightForOpponent, len(straight[0]))
+probabilityOfThreeOfAKindForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInThreeOfAKindForOpponent, len(threeOfAKind[0]))
+probabilityOfTwoPairsForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInTwoPairsForOpponent, len(twoPairs[0]))
+probabilityOfOnePairForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInOnePairForOpponent, len(onePair[0]))
 
-probabilityOfMissingCardsInRoyalFlushForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInRoyalFlushForOpponent)
-probabilityOfMissingCardsInStraightFlushForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInStraightFlushForOpponent)
-probabilityOfMissingCardsInFourOfAKindForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInFourOfAKindForOpponent)
-probabilityOfMissingCardsInFullHouseForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInFullHouseForOpponent)
-probabilityOfMissingCardsInFlushForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInFlushForOpponent)
-probabilityOfMissingCardsInStraightForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInStraightForOpponent)
-probabilityOfMissingCardsInThreeOfAKindForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInThreeOfAKindForOpponent)
-probabilityOfMissingCardsInTwoPairsForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInTwoPairsForOpponent)
-probabilityOfMissingCardsInOnePairForOpponent = probability_of_missing_cards(cards_on_the_table(), missingCardsInOnePairForOpponent)
-        
-
-numberOfFaborableOutcomesForUser = []
-
-numberOfFavorableOutcomesForOpponent = []
 
 totalNumberOfOutcomes = probability_of_a_combination(len(allCards), quantityOfCardsToBeAvailable)
 
