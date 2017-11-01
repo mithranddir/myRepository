@@ -11,11 +11,11 @@ availableCards = ['as', 'ks', 'qs', 'js', '10s']
 aCombination = ['ks', 'qs', 'js', '10s', '9s']
 
 def factorial(n):
-    if n == 0:
-        return 1
-    else:
-        return n * factorial(n - 1)
+    num = 1
+    while n >= 1:
+        num = num * n
+        n = n - 1
+    return num
 
 
-
-print factorial(8)
+print factorial(19)
