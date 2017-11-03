@@ -6,17 +6,19 @@ hearts = ('ah', 'kh', 'qh', 'jh', '10h', '9h', '8h', '7h', '6h', '5h', '4h', '3h
 suits = (spades, clubs, diamonds, hearts)
 allCards = (spades + clubs + diamonds + hearts)
 
-availableCards = ['as', 'ks', 'qs', 'js', '10s']
+availableCards = [['as', 'ks'], ['qs', 'js', '10s'], ['ks', 'qs', 'js'], ['10s', '9s']]
 
-aCombination = ['ks', 'qs', 'js', '10s', '9s']
+def probability_of_missing_cards():
+    a = 0.0
+    a = 2.0 / 3.0
+    return a
 
-def power_of_number(number, powerOfTheNumber):
-    comparisonElement = 2
-    powerOfN = number
-    while powerOfTheNumber >= comparisonElement:
-        powerOfN = powerOfN * number
-        comparisonElement += 1
-    return powerOfN
+def factorial(n):
+    comparisonElement = 1.0
+    while n >= 1:
+        comparisonElement = comparisonElement * n
+        n = n - 1
+    return comparisonElement
 
 
-print power_of_number(1, 4)
+print factorial(4) / 25
