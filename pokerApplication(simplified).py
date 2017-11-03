@@ -195,6 +195,15 @@ cardsOnTheTable = cards_on_the_table()
 availableCards = cardsOnHand + cardsOnTheTable
 
 
+def power_of_number(number, powerOfTheNumber):
+    comparisonElement = 2
+    powerOfN = number
+    while powerOfTheNumber >= comparisonElement:
+        powerOfN = powerOfN * number
+        comparisonElement += 1
+    return powerOfN
+
+
 def factorial(n):
     comparisonElement = 1
     while n >= 1:
@@ -241,9 +250,11 @@ missingCardsInOnePairForOpponent = missing_cards(cardsOnTheTable, onePair)
 
 
 def probability_of_missing_cards(quantityOfAvailableCards, missingCards, combinationLength):
-    comparisonElement = 0
+    probabilityOfOneCard = probability_of_a_combination(1, 1)
     for missingCardsList in missingCards:
-        comparisonElement = len(missingCardsList)
+        power_of_number(probabilityOfOneCard, len(missingCardsList))
+
+
 
 
 

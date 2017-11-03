@@ -10,12 +10,13 @@ availableCards = ['as', 'ks', 'qs', 'js', '10s']
 
 aCombination = ['ks', 'qs', 'js', '10s', '9s']
 
-def factorial(n):
-    num = 1
-    while n >= 1:
-        num = num * n
-        n = n - 1
-    return num
+def power_of_number(number, powerOfTheNumber):
+    comparisonElement = 2
+    powerOfN = number
+    while powerOfTheNumber >= comparisonElement:
+        powerOfN = powerOfN * number
+        comparisonElement += 1
+    return powerOfN
 
 
-print factorial(19)
+print power_of_number(1, 4)
