@@ -305,3 +305,7 @@ probabilityOfStraightForOpponent = probability_of_the_combination(favorableOutco
 probabilityOfThreeOfAKindForOpponent = probability_of_the_combination(favorableOutcomesInThreeOfAKindForOpponent, totalNumberOfOutcomesForOpponent)
 probabilityOfTwoPairsForOpponent = probability_of_the_combination(favorableOutcomesInTwoPairsForOpponent, totalNumberOfOutcomesForOpponent)
 probabilityOfOnePairForOpponent = probability_of_the_combination(favorableOutcomesInOnePairForOpponent, totalNumberOfOutcomesForOpponent)
+
+
+def formating(result, combinationString):
+    return 'The Probability of {}:{}'.format(combinationString, result)
