@@ -198,6 +198,11 @@ availableCards = cardsOnHand + cardsOnTheTable
 
 
 def factorial(n):
+    """
+    Calculates the factorial of a number.
+    :param n: the number to get the factorial of.
+    :return: the factorial of n.
+    """
     comparisonElement = 1.0
     while n >= 1:
         comparisonElement = comparisonElement * n
@@ -206,10 +211,22 @@ def factorial(n):
 
 
 def probability_of_a_combination(allItems, selectedItems):
+    """
+    Calculates the probability of a combination.
+    :param allItems: the items from which items will be selected.
+    :param selectedItems: the items that will be selected.
+    :return: the probability of selecting 'selectedItems' from "allItems".
+    """
     return factorial(allItems) / (factorial(selectedItems) * factorial(allItems - selectedItems))
 
 
 def missing_cards(availableCards, aCombination):
+    """
+    Creates a matrix, where each list is the items that must be open in order for a combination to be selected.
+    :param availableCards: items that are open to a user.
+    :param aCombination: a list of items, that is a combination.
+    :return: list of lists, for each item in 'aCombination' that is not in 'availableCards' is put in a list.
+    """
     missingCardsList = []
     for combinationList in aCombination:
         missingCards = []
@@ -241,7 +258,14 @@ missingCardsInTwoPairsForOpponent = missing_cards(cardsOnTheTable, twoPairs)
 missingCardsInOnePairForOpponent = missing_cards(cardsOnTheTable, onePair)
 
 
-def probability_of_missing_cards(quantityOfAvailableCards, missingCards):
+def probability_of_missing_cards(missingCards, availableCards, allCards):
+    """
+    Calculates the probability of selecting a combination with existing items.
+    :param missingCards:
+    :param availableCards:
+    :param allCards: 
+    :return: probability of selecting 'missingCards' out of 'availableCards'.
+    """
     theElement = 0
     for missingCardsList in missingCards:
         if (quantityOfCardsToBeAvailable - len(availableCards)) > missingCards:
