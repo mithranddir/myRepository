@@ -1,7 +1,7 @@
-spades = ('as', 'ks', 'qs', 'js', '10s', '9s', '8s', '7s', '6s', '5s', '4s', '3s', '2s')
-clubs = ('ac', 'kc', 'qc', 'jc', '10c', '9c', '8c', '7c', '6c', '5c', '4c', '3c', '2c')
-diamonds = ('ad', 'kd', 'qd', 'jd', '10d', '9d', '8d', '7d', '6d', '5d', '4d', '3d', '2d')
-hearts = ('ah', 'kh', 'qh', 'jh', '10h', '9h', '8h', '7h', '6h', '5h', '4h', '3h', '2h')
+spades = ['as', 'ks', 'qs', 'js', '10s', '9s', '8s', '7s', '6s', '5s', '4s', '3s', '2s']
+clubs = ['ac', 'kc', 'qc', 'jc', '10c', '9c', '8c', '7c', '6c', '5c', '4c', '3c', '2c']
+diamonds = ['ad', 'kd', 'qd', 'jd', '10d', '9d', '8d', '7d', '6d', '5d', '4d', '3d', '2d']
+hearts = ['ah', 'kh', 'qh', 'jh', '10h', '9h', '8h', '7h', '6h', '5h', '4h', '3h', '2h']
 
 
 royalFlushSpades = ['as', 'ks', 'qs', 'js', '10s']
@@ -169,6 +169,11 @@ quantityOfCardsToBeAvailable = quantityOfCardsToBeOnHand + quantityOfCardsToBeOn
 
 
 def cards_on_hand():
+    """
+    Creates a list of cards that are on hand.
+
+    :return: list of cards that are on hand.
+    """
     comparisonElement = 1
     cardsOnHand = []
     quantityOfCardsOnHand = input('How many cards ARE on hand?')
@@ -180,6 +185,11 @@ def cards_on_hand():
 
 
 def cards_on_the_table():
+    """
+    Creates a list of cards that are on the table.
+
+    :return: list of cards that are on the table.
+    """
     comparisonElement = 1
     cardsOnTheTable = []
     quantityOfCardsOnTheTable = input('How many cards ARE on the table?')
@@ -200,6 +210,7 @@ availableCards = cardsOnHand + cardsOnTheTable
 def factorial(n):
     """
     Calculates the factorial of a number.
+
     :param n: the number to get the factorial of.
     :return: the factorial of n.
     """
@@ -213,6 +224,7 @@ def factorial(n):
 def probability_of_a_combination(allItems, selectedItems):
     """
     Calculates the probability of a combination.
+
     :param allItems: the items from which items will be selected.
     :param selectedItems: the items that will be selected.
     :return: the probability of selecting 'selectedItems' from "allItems".
@@ -222,7 +234,8 @@ def probability_of_a_combination(allItems, selectedItems):
 
 def missing_cards(availableCards, aCombination):
     """
-    Creates a matrix, where each list is the items that must be open in order for a combination to be selected.
+    Creates a matrix where each list is a list of items that are in a combination, but not in available cards.
+
     :param availableCards: items that are open to a user.
     :param aCombination: a list of items, that is a combination.
     :return: list of lists, for each item in 'aCombination' that is not in 'availableCards' is put in a list.
@@ -260,11 +273,12 @@ missingCardsInOnePairForOpponent = missing_cards(cardsOnTheTable, onePair)
 
 def probability_of_missing_cards(missingCards, availableCards, allCards):
     """
-    Calculates the probability of selecting a combination with existing items.
+    Calculates the probability of selecting missing cards out of all cards.
+
     :param missingCards:
     :param availableCards:
-    :param allCards: 
-    :return: probability of selecting 'missingCards' out of 'availableCards'.
+    :param allCards:
+    :return: probability of selecting 'missingCards' out of 'allCards'.
     """
     theElement = 0
     for missingCardsList in missingCards:
@@ -298,6 +312,13 @@ favorableOutcomesInOnePairForOpponent = probability_of_missing_cards(cardsOnTheT
 
 
 def total_number_of_outcomes(allCards, availableCards):
+    """
+
+
+    :param allCards:
+    :param availableCards:
+    :return:
+    """
     return probability_of_a_combination(len(allCards) - len(availableCards), quantityOfCardsToBeAvailable - len(availableCards))
 
 
@@ -307,6 +328,13 @@ totalNumberOfOutcomesForOpponent = total_number_of_outcomes(allCards, cardsOnThe
 
 
 def probability_of_the_combination(numberOfFavorableOutcomes, totalNumberOfOutcomes):
+    """
+    Calculates probability of a particular combination.
+
+    :param numberOfFavorableOutcomes:
+    :param totalNumberOfOutcomes:
+    :return:
+    """
     return numberOfFavorableOutcomes / totalNumberOfOutcomes
 
 
@@ -330,6 +358,3 @@ probabilityOfThreeOfAKindForOpponent = probability_of_the_combination(favorableO
 probabilityOfTwoPairsForOpponent = probability_of_the_combination(favorableOutcomesInTwoPairsForOpponent, totalNumberOfOutcomesForOpponent)
 probabilityOfOnePairForOpponent = probability_of_the_combination(favorableOutcomesInOnePairForOpponent, totalNumberOfOutcomesForOpponent)
 
-
-def formating(result, combinationString):
-    return 'The Probability of {}:{}'.format(combinationString, result)
