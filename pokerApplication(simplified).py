@@ -234,7 +234,7 @@ def probability_of_a_combination(allItems, selectedItems):
 
 def missing_cards(availableCards, aCombination):
     """
-    Creates a matrix where each list is a list of items that are in a combination, but not in available cards.
+    Creates a matrix where each list is a list of items that are missing for a combination.
 
     :param availableCards: items that are open to a user.
     :param aCombination: a list of items, that is a combination.
@@ -271,13 +271,12 @@ missingCardsInTwoPairsForOpponent = missing_cards(cardsOnTheTable, twoPairs)
 missingCardsInOnePairForOpponent = missing_cards(cardsOnTheTable, onePair)
 
 
-def probability_of_missing_cards(missingCards, availableCards, allCards):
+def probability_of_missing_cards(missingCards, allCards):
     """
     Calculates the probability of selecting missing cards out of all cards.
 
-    :param missingCards:
-    :param availableCards:
-    :param allCards:
+    :param missingCards: list of cards, where each card needs to be selected in order for combination to be open.
+    :param allCards: list of cards, from which the "missingCards' will be selected.
     :return: probability of selecting 'missingCards' out of 'allCards'.
     """
     theElement = 0
@@ -290,34 +289,34 @@ def probability_of_missing_cards(missingCards, availableCards, allCards):
     return theElement
 
 
-favorableOutcomesInRoyalFlushForUser = probability_of_missing_cards(availableCards, missingCardsInRoyalFlushForUser)
-favorableOutcomesInStraightFlushForUser = probability_of_missing_cards(availableCards, missingCardsInStraightFlushForUser)
-favorableOutcomesInFourOfAKindForUser = probability_of_missing_cards(availableCards, missingCardsInFourOfAKindForUser)
-favorableOutcomesInFullHouseForUser = probability_of_missing_cards(availableCards, missingCardsInFullHouseForUser)
-favorableOutcomesInFlushForUser = probability_of_missing_cards(availableCards, missingCardsInFlushForUser)
-favorableOutcomesInStraightForUser = probability_of_missing_cards(availableCards, missingCardsInStraightForUser)
-favorableOutcomesInThreeOfAKindForUser = probability_of_missing_cards(availableCards, missingCardsInThreeOfAKindForUser)
-favorableOutcomesInTwoPairsForUser = probability_of_missing_cards(availableCards, missingCardsInTwoPairsForUser)
-favorableOutcomesInOnePairForUser = probability_of_missing_cards(availableCards, missingCardsInOnePairForUser)
+favorableOutcomesInRoyalFlushForUser = probability_of_missing_cards(missingCardsInRoyalFlushForUser, allCards)
+favorableOutcomesInStraightFlushForUser = probability_of_missing_cards(missingCardsInStraightFlushForUser, allCards)
+favorableOutcomesInFourOfAKindForUser = probability_of_missing_cards(missingCardsInFourOfAKindForUser, allCards)
+favorableOutcomesInFullHouseForUser = probability_of_missing_cards(missingCardsInFullHouseForUser, allCards)
+favorableOutcomesInFlushForUser = probability_of_missing_cards(missingCardsInFlushForUser, allCards)
+favorableOutcomesInStraightForUser = probability_of_missing_cards(missingCardsInStraightForUser, allCards)
+favorableOutcomesInThreeOfAKindForUser = probability_of_missing_cards(missingCardsInThreeOfAKindForUser, allCards)
+favorableOutcomesInTwoPairsForUser = probability_of_missing_cards(missingCardsInTwoPairsForUser, allCards)
+favorableOutcomesInOnePairForUser = probability_of_missing_cards(missingCardsInOnePairForUser, allCards)
 
-favorableOutcomesInRoyalFlushForOpponent = probability_of_missing_cards(cardsOnTheTable, missingCardsInRoyalFlushForOpponent)
-favorableOutcomesInStraightFlushForOpponent = probability_of_missing_cards(cardsOnTheTable, missingCardsInStraightFlushForOpponent)
-favorableOutcomesInFourOfAKindForOpponent = probability_of_missing_cards(cardsOnTheTable, missingCardsInFourOfAKindForOpponent)
-favorableOutcomesInFullHouseForOpponent = probability_of_missing_cards(cardsOnTheTable, missingCardsInFullHouseForOpponent)
-favorableOutcomesInFlushForOpponent = probability_of_missing_cards(cardsOnTheTable, missingCardsInFlushForOpponent)
-favorableOutcomesInStraightForOpponent = probability_of_missing_cards(cardsOnTheTable, missingCardsInStraightForOpponent)
-favorableOutcomesInThreeOfAKindForOpponent = probability_of_missing_cards(cardsOnTheTable, missingCardsInThreeOfAKindForOpponent)
-favorableOutcomesInTwoPairsForOpponent = probability_of_missing_cards(cardsOnTheTable, missingCardsInTwoPairsForOpponent)
-favorableOutcomesInOnePairForOpponent = probability_of_missing_cards(cardsOnTheTable, missingCardsInOnePairForOpponent)
+favorableOutcomesInRoyalFlushForOpponent = probability_of_missing_cards(missingCardsInRoyalFlushForOpponent, allCards)
+favorableOutcomesInStraightFlushForOpponent = probability_of_missing_cards(missingCardsInStraightFlushForOpponent, allCards)
+favorableOutcomesInFourOfAKindForOpponent = probability_of_missing_cards(missingCardsInFourOfAKindForOpponent, allCards)
+favorableOutcomesInFullHouseForOpponent = probability_of_missing_cards(missingCardsInFullHouseForOpponent, allCards)
+favorableOutcomesInFlushForOpponent = probability_of_missing_cards(missingCardsInFlushForOpponent, allCards)
+favorableOutcomesInStraightForOpponent = probability_of_missing_cards(missingCardsInStraightForOpponent, allCards)
+favorableOutcomesInThreeOfAKindForOpponent = probability_of_missing_cards(missingCardsInThreeOfAKindForOpponent, allCards)
+favorableOutcomesInTwoPairsForOpponent = probability_of_missing_cards(missingCardsInTwoPairsForOpponent, allCards)
+favorableOutcomesInOnePairForOpponent = probability_of_missing_cards(missingCardsInOnePairForOpponent, allCards)
 
 
 def total_number_of_outcomes(allCards, availableCards):
     """
+    Calculates probability of selecting missing cards out of all cards.
 
-
-    :param allCards:
-    :param availableCards:
-    :return:
+    :param allCards: list of cards, from which the cards will be selected.
+    :param availableCards: list of cards, that are available for the user.
+    :return: probability of selecting 'missing cards' out of 'all cards'.
     """
     return probability_of_a_combination(len(allCards) - len(availableCards), quantityOfCardsToBeAvailable - len(availableCards))
 
@@ -331,9 +330,9 @@ def probability_of_the_combination(numberOfFavorableOutcomes, totalNumberOfOutco
     """
     Calculates probability of a particular combination.
 
-    :param numberOfFavorableOutcomes:
-    :param totalNumberOfOutcomes:
-    :return:
+    :param numberOfFavorableOutcomes: probability of selecting missing cards out of all cards.
+    :param totalNumberOfOutcomes: sum of probabilities of selecting each missing card.
+    :return: probability of selecting a particular combination.
     """
     return numberOfFavorableOutcomes / totalNumberOfOutcomes
 
