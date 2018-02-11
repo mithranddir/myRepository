@@ -1,3 +1,7 @@
+quantityOfCardsToBeOnHand = input('How many cards MUST be on hand?')
+quantityOfCardsToBeOnTheTable = input('How many cards MUST be on the table?')
+quantityOfCardsToBeAvailable = quantityOfCardsToBeOnHand + quantityOfCardsToBeOnTheTable
+
 def cards_on_hand():
     """
     Creates a list of cards that are on hand.
@@ -28,3 +32,7 @@ def cards_on_the_table():
         cardsOnTheTable.append(card)
         comparisonElement += 1
     return cardsOnTheTable
+
+cardsOnHand = cards_on_hand()
+cardsOnTheTable = cards_on_the_table()
+availableCards = cardsOnHand + cardsOnTheTable
