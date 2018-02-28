@@ -1,6 +1,70 @@
 from combinations import *
-from input import *
-from probability import *
+
+quantityOfCardsToBeOnHand = input('How many cards MUST be on hand?')
+quantityOfCardsToBeOnTheTable = input('How many cards MUST be on the table?')
+quantityOfCardsToBeAvailable = quantityOfCardsToBeOnHand + quantityOfCardsToBeOnTheTable
+
+
+def cards_on_hand():
+    """
+    Creates a list of cards that are on hand.
+
+    :return: list of cards that are on hand.
+    """
+    comparisonElement = 1
+    cardsOnHand = []
+    quantityOfCardsOnHand = input('How many cards ARE on hand?')
+    while quantityOfCardsOnHand >= comparisonElement:
+        card = raw_input('Input card on hand #{}'.format(comparisonElement))
+        cardsOnHand.append(card)
+        comparisonElement += 1
+    return cardsOnHand
+
+
+def cards_on_the_table():
+    """
+    Creates a list of cards that are on the table.
+
+    :return: list of cards that are on the table.
+    """
+    comparisonElement = 1
+    cardsOnTheTable = []
+    quantityOfCardsOnTheTable = input('How many cards ARE on the table?')
+    while quantityOfCardsOnTheTable >= comparisonElement:
+        card = raw_input('Input card on the table #{}'.format(comparisonElement))
+        cardsOnTheTable.append(card)
+        comparisonElement += 1
+    return cardsOnTheTable
+
+cardsOnHand = cards_on_hand()
+cardsOnTheTable = cards_on_the_table()
+availableCards = cardsOnHand + cardsOnTheTable
+
+
+def factorial(n):
+    """
+    Calculates the factorial of a number.
+
+    :param n: the number to get the factorial of.
+    :return: the factorial of n.
+    """
+    comparisonElement = 1.0
+    while n >= 1:
+        comparisonElement = comparisonElement * n
+        n = n - 1
+    return comparisonElement
+
+
+def probability_of_a_combination(allItems, selectedItems):
+    """
+    Calculates the probability of a combination.
+
+    :param allItems: the items from which items will be selected.
+    :param selectedItems: the items that will be selected.
+    :return: the probability of selecting 'selectedItems' from "allItems".
+    """
+    return factorial(allItems) / (factorial(selectedItems) * factorial(allItems - selectedItems))
+
 
 def missing_cards(availableCards, aCombination):
     """
@@ -92,8 +156,6 @@ def total_number_of_outcomes(allCards, availableCards):
 
 
 totalNumberOfOutcomesForUser = total_number_of_outcomes(allCards, availableCards)
-
-#change this to (allCards - cardsOnHand)
 totalNumberOfOutcomesForOpponent = total_number_of_outcomes(allCards, cardsOnTheTable)
 
 
@@ -128,5 +190,3 @@ probabilityOfThreeOfAKindForOpponent = probability_of_the_combination(favorableO
 probabilityOfTwoPairsForOpponent = probability_of_the_combination(favorableOutcomesInTwoPairsForOpponent, totalNumberOfOutcomesForOpponent)
 probabilityOfOnePairForOpponent = probability_of_the_combination(favorableOutcomesInOnePairForOpponent, totalNumberOfOutcomesForOpponent)
 
-
-print probabilityOfRoyalFlushForUser
