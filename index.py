@@ -74,14 +74,14 @@ def missing_cards(availableCards, aCombination):
     :param aCombination: a list of items, that is a combination.
     :return: list of lists, for each item in 'aCombination' that is not in 'availableCards' is put in a list.
     """
-    missingCardsList = []
+    missingCardsMatrix = []
     for combinationList in aCombination:
-        missingCards = []
+        missingCardsList = []
         for card in combinationList:
             if card not in availableCards:
-                missingCards.append(card)
-        missingCardsList.append(missingCards)
-    return missingCardsList
+                missingCardsList.append(card)
+        missingCardsMatrix.append(missingCardsList)
+    return missingCardsMatrix
 
 
 missingCardsInRoyalFlushForUser = missing_cards(availableCards, royalFlush)
@@ -115,11 +115,14 @@ def probability_of_missing_cards(missingCards, allCards):
     """
     theElement = 0
     for missingCardsList in missingCards:
-        if (quantityOfCardsToBeAvailable - len(availableCards)) > missingCards:
-            groundElement = probability_of_a_combination(len(missingCardsList), len(missingCardsList))
+        if (quantityOfCardsToBeAvailable - len(availableCards)) < missingCards:
+            theElement = 0
+        elif len(missingCardsList) == 0:
+            theElement = 1
         else:
-            groundElement = probability_of_a_combination(len(missingCardsList), (quantityOfCardsToBeAvailable - len(availableCards)))
-        theElement = theElement + groundElement
+            theElement = probability_of_a_combination(len(missingCardsList), (quantityOfCardsToBeAvailable - len(availableCards)))
+
+        return theElement
     return theElement
 
 
