@@ -8,8 +8,6 @@ quantityOfCardsToBeAvailable = quantityOfCardsToBeOnHand + quantityOfCardsToBeOn
 def cards_on_hand():
     """
     Creates a list of cards that are on hand.
-
-    :return: list of cards that are on hand.
     """
     comparisonElement = 1
     cardsOnHand = []
@@ -24,8 +22,6 @@ def cards_on_hand():
 def cards_on_the_table():
     """
     Creates a list of cards that are on the table.
-
-    :return: list of cards that are on the table.
     """
     comparisonElement = 1
     cardsOnTheTable = []
@@ -44,9 +40,6 @@ availableCards = cardsOnHand + cardsOnTheTable
 def factorial(n):
     """
     Calculates the factorial of a number.
-
-    :param n: the number to get the factorial of.
-    :return: the factorial of n.
     """
     comparisonElement = 1.0
     while n >= 1:
@@ -58,10 +51,6 @@ def factorial(n):
 def probability_of_a_combination(allItems, selectedItems):
     """
     Calculates the probability of a combination.
-
-    :param allItems: the items from which items will be selected.
-    :param selectedItems: the items that will be selected.
-    :return: the probability of selecting 'selectedItems' from "allItems".
     """
     return factorial(allItems) / (factorial(selectedItems) * factorial(allItems - selectedItems))
 
@@ -69,10 +58,6 @@ def probability_of_a_combination(allItems, selectedItems):
 def missing_cards(availableCards, aCombination):
     """
     Creates a matrix where each list is a list of items that are missing for the particular combination.
-
-    :param availableCards: items that are open to a user.
-    :param aCombination: a list of items, that is a combination.
-    :return: list of lists, for each item in 'aCombination' that is not in 'availableCards' is put in a list.
     """
     missingCardsMatrix = []
     for combinationList in aCombination:
@@ -108,10 +93,6 @@ missingCardsInOnePairForOpponent = missing_cards(cardsOnTheTable, onePair)
 def probability_of_missing_cards(missingCards, availableCards):
     """
     Calculates the probability of selecting missing cards out of all cards.
-
-    :param missingCards: list of cards, where each card needs to be selected in order for combination to be open.
-    :param allCards: list of cards, from which the "missingCards' will be selected.
-    :return: probability of selecting 'missingCards' out of 'allCards'.
     """
     missingCardsLength = []
     for missingCardsList in missingCards:
@@ -125,8 +106,9 @@ def probability_of_missing_cards(missingCards, availableCards):
     elif (missingCardsLength[0] > (quantityOfCardsToBeAvailable - len(availableCards))):#combination cannot be selected
         pass
     else:
-        pass
-            
+        for card in missingCardsLength:
+            pass
+
     
 
 
@@ -154,10 +136,6 @@ favorableOutcomesInOnePairForOpponent = probability_of_missing_cards(missingCard
 def total_number_of_outcomes(allCards, availableCards):
     """
     Calculates probability of selecting missing cards out of all cards.
-
-    :param allCards: list of cards, from which the cards will be selected.
-    :param availableCards: list of cards, that are available for the user.
-    :return: probability of selecting 'missing cards' out of 'all cards'.
     """
     return probability_of_a_combination(len(allCards) - len(availableCards), quantityOfCardsToBeAvailable - len(availableCards))
 
@@ -169,10 +147,6 @@ totalNumberOfOutcomesForOpponent = total_number_of_outcomes(allCards, cardsOnThe
 def probability_of_the_combination(numberOfFavorableOutcomes, totalNumberOfOutcomes):
     """
     Calculates probability of a particular combination.
-
-    :param numberOfFavorableOutcomes: probability of selecting missing cards out of all cards.
-    :param totalNumberOfOutcomes: sum of probabilities of selecting each missing card.
-    :return: probability of selecting a particular combination.
     """
     return numberOfFavorableOutcomes / totalNumberOfOutcomes
 
