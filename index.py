@@ -32,6 +32,7 @@ def cards_on_the_table():
         comparisonElement += 1
     return cardsOnTheTable
 
+
 cardsOnHand = cards_on_hand()
 cardsOnTheTable = cards_on_the_table()
 availableCards = cardsOnHand + cardsOnTheTable
@@ -94,22 +95,32 @@ def probability_of_missing_cards(missingCards, availableCards):
     """
     Calculates the probability of selecting missing cards out of all cards.
     """
+    theCardProbability = probability_of_a_combination(1, 1)#probability of selecting a unique card
+    quantityOfCardsThatWillBeAvailable = quantityOfCardsToBeAvailable - len(availableCards)#quantity of cards that will be available, but not yet available
     missingCardsLength = []
-    for missingCardsList in missingCards:
+    for missingCardsList in missingCards:#converts missingCards into list with its lists lengths
         listLength = len(missingCardsList)
         missingCardsLength.append(listLength)
     missingCardsLength.sort()
-    theCardProbability = probability_of_a_combination(1, 1)
-    comparisonElement = 0
-    if (missingCardsLength[0] == 0):#combination is selected
+    if missingCardsLength[0] == 0:#combination is selected
         pass
-    elif (missingCardsLength[0] > (quantityOfCardsToBeAvailable - len(availableCards))):#combination cannot be selected
+    elif missingCardsLength[0] > (quantityOfCardsToBeAvailable - len(availableCards)):#combination cannot be selected
         pass
-    else:
+    else:#combinatio can be selected, but not yet selected
+        allMissingCardsProbability = 0
+        theMissingCardsProbability = 0
         for card in missingCardsLength:
-            pass
+            probabilityOfUnrelatedCards = probability_of_a_combination(allCards - len(availableCards), quantityOfCardsThatWillBeAvailable - card)#probability of selecting cards that are irralavant to the combination
+            probabilityOfTheCards = 1
+            comparisonElement = 0
+            while (quantityOfCardsThatWillBeAvailable - card) >= comparisonElement:
+                probabilityOfTheCards = probabilityOfTheCards * theCardProbability
+                comparisonElement += 1
+            theMissingCardsProbability = 0
+            allMissingCardsProbability = allMissingCardsProbability + theMissingCardsProbability
 
-    
+
+
 
 
 favorableOutcomesInRoyalFlushForUser = probability_of_missing_cards(missingCardsInRoyalFlushForUser, availableCards)
