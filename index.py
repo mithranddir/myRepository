@@ -9,13 +9,11 @@ def cards_on_hand():
     """
     Creates a list of cards that are on hand.
     """
-    comparisonElement = 1
     cardsOnHand = []
     quantityOfCardsOnHand = input('How many cards ARE on hand?')
-    while quantityOfCardsOnHand >= comparisonElement:
-        card = raw_input('Input card on hand #{}'.format(comparisonElement))
+    for el in xrange(quantityOfCardsOnHand):
+        card = raw_input('Input card on hand #{}'.format(el))
         cardsOnHand.append(card)
-        comparisonElement += 1
     return cardsOnHand
 
 
@@ -23,13 +21,11 @@ def cards_on_the_table():
     """
     Creates a list of cards that are on the table.
     """
-    comparisonElement = 1
     cardsOnTheTable = []
     quantityOfCardsOnTheTable = input('How many cards ARE on the table?')
-    while quantityOfCardsOnTheTable >= comparisonElement:
-        card = raw_input('Input card on the table #{}'.format(comparisonElement))
+    for el in xrange(quantityOfCardsOnTheTable):
+        card = raw_input('Input card on the table #{}'.format(el))
         cardsOnTheTable.append(card)
-        comparisonElement += 1
     return cardsOnTheTable
 
 
@@ -42,11 +38,11 @@ def factorial(n):
     """
     Calculates the factorial of a number.
     """
-    comparisonElement = 1.0
-    while n >= 1:
-        comparisonElement = comparisonElement * n
+
+    for el in xrange(n):
+        f = n * (n - 1)
         n = n - 1
-    return comparisonElement
+    return f
 
 
 def probability_of_a_combination(allItems, selectedItems):
@@ -75,7 +71,7 @@ missingCardsInStraightFlushForUser = missing_cards(availableCards, straightFlush
 missingCardsInFourOfAKindForUser = missing_cards(availableCards, fourOfAKind)
 missingCardsInFullHouseForUser = missing_cards(availableCards, fullHouse)
 missingCardsInFlushForUser = missing_cards(availableCards, flush)
-missingCardsInStraightForUser = missing_cards(availableCards, straight)
+#missingCardsInStraightForUser = missing_cards(availableCards, straight)
 missingCardsInThreeOfAKindForUser = missing_cards(availableCards, threeOfAKind)
 missingCardsInTwoPairsForUser = missing_cards(availableCards, twoPairs)
 missingCardsInOnePairForUser = missing_cards(availableCards, onePair)
@@ -85,7 +81,7 @@ missingCardsInStraightFlushForOpponent = missing_cards(cardsOnTheTable, straight
 missingCardsInFourOfAKindForOpponent = missing_cards(cardsOnTheTable, fourOfAKind)
 missingCardsInFullHouseForOpponent = missing_cards(cardsOnTheTable, fullHouse)
 missingCardsInFlushForOpponent = missing_cards(cardsOnTheTable, flush)
-missingCardsInStraightForOpponent = missing_cards(cardsOnTheTable, straight)
+#missingCardsInStraightForOpponent = missing_cards(cardsOnTheTable, straight)
 missingCardsInThreeOfAKindForOpponent = missing_cards(cardsOnTheTable, threeOfAKind)
 missingCardsInTwoPairsForOpponent = missing_cards(cardsOnTheTable, twoPairs)
 missingCardsInOnePairForOpponent = missing_cards(cardsOnTheTable, onePair)
@@ -186,3 +182,4 @@ probabilityOfRoyalFlushForUser = probability_of_the_combination(favorableOutcome
 # probabilityOfTwoPairsForOpponent = probability_of_the_combination(favorableOutcomesInTwoPairsForOpponent, totalNumberOfOutcomesForOpponent)
 # probabilityOfOnePairForOpponent = probability_of_the_combination(favorableOutcomesInOnePairForOpponent, totalNumberOfOutcomesForOpponent)
 
+print(missingCardsInRoyalFlushForUser)
