@@ -1,5 +1,7 @@
 import itertools
 
+
+#--------------------combinations--------------------
 spades = ['as', 'ks', 'qs', 'js', '10s', '9s', '8s', '7s', '6s', '5s', '4s', '3s', '2s']
 clubs = ['ac', 'kc', 'qc', 'jc', '10c', '9c', '8c', '7c', '6c', '5c', '4c', '3c', '2c']
 diamonds = ['ad', 'kd', 'qd', 'jd', '10d', '9d', '8d', '7d', '6d', '5d', '4d', '3d', '2d']
@@ -46,7 +48,7 @@ straightFlush = straightFlush()
 
 flush = [result for theList in suits for result in itertools.combinations(theList, 5)]
 
-# straight = [result for theList in ranks for result in itertools.combinations(theList, 5)]
+straight = [(card1, card2, card3, card4, card5) for card1 in ranks ]
 
 fourOfAKind = ranks
 
@@ -57,10 +59,10 @@ onePair = pairs(2)
 fullHouse = [(aPair, aSet) for aPair in onePair for aSet in threeOfAKind]
 
 twoPairs = [(thePair, aPair) for thePair in onePair for aPair in onePair]
+#--------------------combinations--------------------
 
-# print([el for el in itertools.permutations([0, 1, 2, 3], 4)])
-#print(len(twoPairs))
 
+#--------------------input--------------------
 quantityOfCardsToBeOnHand = input('How many cards MUST be on hand?')
 quantityOfCardsToBeOnTheTable = input('How many cards MUST be on the table?')
 quantityOfCardsToBeAvailable = quantityOfCardsToBeOnHand + quantityOfCardsToBeOnTheTable
@@ -93,8 +95,10 @@ def cards_on_the_table():
 cardsOnHand = cards_on_hand()
 cardsOnTheTable = cards_on_the_table()
 availableCards = cardsOnHand + cardsOnTheTable
+#--------------------input--------------------
 
 
+#--------------------calculator--------------------
 def factorial(n):
     """
     Calculates the factorial of a number.
@@ -242,5 +246,10 @@ probabilityOfRoyalFlushForUser = probability_of_the_combination(favorableOutcome
 # probabilityOfThreeOfAKindForOpponent = probability_of_the_combination(favorableOutcomesInThreeOfAKindForOpponent, totalNumberOfOutcomesForOpponent)
 # probabilityOfTwoPairsForOpponent = probability_of_the_combination(favorableOutcomesInTwoPairsForOpponent, totalNumberOfOutcomesForOpponent)
 # probabilityOfOnePairForOpponent = probability_of_the_combination(favorableOutcomesInOnePairForOpponent, totalNumberOfOutcomesForOpponent)
+#--------------------calculator--------------------
 
+
+#--------------------output--------------------
 print(missingCardsInRoyalFlushForUser)
+
+#--------------------output--------------------
