@@ -52,8 +52,11 @@ fourOfAKind = ranks
 
 threeOfAKind = pairs(3)
 
-twoPairs = pairs(2)
+onePair = pairs(2)
 
-fullHouse = [(aPair, aSet) for aPair in twoPairs for aSet in threeOfAKind]
+fullHouse = [(aPair, aSet) for aPair in onePair for aSet in threeOfAKind]
 
-print([el for el in itertools.permutations([0, 1, 2, 3], 4)])
+twoPairs = [(thePair, aPair) for thePair in onePair for aPair in onePair]
+
+# print([el for el in itertools.permutations([0, 1, 2, 3], 4)])
+#print(len(twoPairs))
