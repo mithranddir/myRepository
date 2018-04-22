@@ -1,5 +1,69 @@
-from combinations import *
+import itertools
 
+
+# --------------------combinations--------------------
+spades = ['as', 'ks', 'qs', 'js', '10s', '9s', '8s', '7s', '6s', '5s', '4s', '3s', '2s']
+clubs = ['ac', 'kc', 'qc', 'jc', '10c', '9c', '8c', '7c', '6c', '5c', '4c', '3c', '2c']
+diamonds = ['ad', 'kd', 'qd', 'jd', '10d', '9d', '8d', '7d', '6d', '5d', '4d', '3d', '2d']
+hearts = ['ah', 'kh', 'qh', 'jh', '10h', '9h', '8h', '7h', '6h', '5h', '4h', '3h', '2h']
+
+allCards = [spades + clubs + diamonds + hearts]
+suits = [spades, clubs, diamonds, hearts]
+ranks = [suit for suit in zip(spades, clubs, diamonds, hearts)]
+
+
+def straightFlush():
+    result = []
+    for suit in suits:
+        ind1 = 1
+        ind2 = 6
+        while ind2 < 14:
+            result.append(suit[ind1:ind2])
+            ind1 += 1
+            ind2 += 1
+    return result
+
+
+def pairs(combinationLength):
+    """
+    Creates Pair and Three of a Kind combinations
+    """
+    suitsIndex = [0, 1, 2, 3]
+    indexCombinations = [el for el in itertools.combinations(suitsIndex, combinationLength)]
+
+    result = []
+    for indexes in indexCombinations:
+        listOne = suits[indexes[0]]
+        listTwo = suits[indexes[1]]
+        if combinationLength == 2:
+            result = result + [(index1, index2) for index1, index2 in zip(listOne, listTwo)]
+        elif combinationLength == 3:
+            listThree = suits[indexes[2]]
+            result = result + [(index1, index2, index3) for index1, index2, index3 in zip(listOne, listTwo, listThree)]
+    return result
+
+
+royalFlush = [theList[:5] for theList in suits]
+
+straightFlush = straightFlush()
+
+flush = [result for theList in suits for result in itertools.combinations(theList, 5)]
+
+straight = []
+
+fourOfAKind = ranks
+
+threeOfAKind = pairs(3)
+
+onePair = pairs(2)
+
+fullHouse = [(aPair, aSet) for aPair in onePair for aSet in threeOfAKind]
+
+twoPairs = [(thePair, aPair) for thePair in onePair for aPair in onePair]
+# --------------------combinations--------------------
+
+
+# --------------------input--------------------
 quantityOfCardsToBeOnHand = input('How many cards MUST be on hand?')
 quantityOfCardsToBeOnTheTable = input('How many cards MUST be on the table?')
 quantityOfCardsToBeAvailable = quantityOfCardsToBeOnHand + quantityOfCardsToBeOnTheTable
@@ -11,7 +75,7 @@ def cards_on_hand():
     """
     cardsOnHand = []
     quantityOfCardsOnHand = input('How many cards ARE on hand?')
-    for el in range(quantityOfCardsOnHand):
+    for el in xrange(quantityOfCardsOnHand):
         card = raw_input('Input card on hand #{}'.format(el))
         cardsOnHand.append(card)
     return cardsOnHand
@@ -23,7 +87,7 @@ def cards_on_the_table():
     """
     cardsOnTheTable = []
     quantityOfCardsOnTheTable = input('How many cards ARE on the table?')
-    for el in range(quantityOfCardsOnTheTable):
+    for el in xrange(quantityOfCardsOnTheTable):
         card = raw_input('Input card on the table #{}'.format(el))
         cardsOnTheTable.append(card)
     return cardsOnTheTable
@@ -32,16 +96,19 @@ def cards_on_the_table():
 cardsOnHand = cards_on_hand()
 cardsOnTheTable = cards_on_the_table()
 availableCards = cardsOnHand + cardsOnTheTable
+# --------------------input--------------------
 
 
+# --------------------calculator--------------------
 def factorial(n):
     """
     Calculates the factorial of a number.
     """
-    for el in xrange(n):
-        fact = n * (n - 1)
+    rtn = 1
+    while n >= 1:
+        rtn = rtn * n
         n = n - 1
-    return fact
+    return rtn
 
 
 def probability_of_a_combination(allItems, selectedItems):
@@ -70,7 +137,7 @@ missingCardsInStraightFlushForUser = missing_cards(availableCards, straightFlush
 missingCardsInFourOfAKindForUser = missing_cards(availableCards, fourOfAKind)
 missingCardsInFullHouseForUser = missing_cards(availableCards, fullHouse)
 missingCardsInFlushForUser = missing_cards(availableCards, flush)
-#missingCardsInStraightForUser = missing_cards(availableCards, straight)
+missingCardsInStraightForUser = missing_cards(availableCards, straight)
 missingCardsInThreeOfAKindForUser = missing_cards(availableCards, threeOfAKind)
 missingCardsInTwoPairsForUser = missing_cards(availableCards, twoPairs)
 missingCardsInOnePairForUser = missing_cards(availableCards, onePair)
@@ -80,7 +147,7 @@ missingCardsInStraightFlushForOpponent = missing_cards(cardsOnTheTable, straight
 missingCardsInFourOfAKindForOpponent = missing_cards(cardsOnTheTable, fourOfAKind)
 missingCardsInFullHouseForOpponent = missing_cards(cardsOnTheTable, fullHouse)
 missingCardsInFlushForOpponent = missing_cards(cardsOnTheTable, flush)
-#missingCardsInStraightForOpponent = missing_cards(cardsOnTheTable, straight)
+missingCardsInStraightForOpponent = missing_cards(cardsOnTheTable, straight)
 missingCardsInThreeOfAKindForOpponent = missing_cards(cardsOnTheTable, threeOfAKind)
 missingCardsInTwoPairsForOpponent = missing_cards(cardsOnTheTable, twoPairs)
 missingCardsInOnePairForOpponent = missing_cards(cardsOnTheTable, onePair)
@@ -117,24 +184,24 @@ def probability_of_missing_cards(missingCards, availableCards):
 
 
 favorableOutcomesInRoyalFlushForUser = probability_of_missing_cards(missingCardsInRoyalFlushForUser, availableCards)
-# favorableOutcomesInStraightFlushForUser = probability_of_missing_cards(missingCardsInStraightFlushForUser, availableCards)
-# favorableOutcomesInFourOfAKindForUser = probability_of_missing_cards(missingCardsInFourOfAKindForUser, availableCards)
-# favorableOutcomesInFullHouseForUser = probability_of_missing_cards(missingCardsInFullHouseForUser, availableCards)
-# favorableOutcomesInFlushForUser = probability_of_missing_cards(missingCardsInFlushForUser, availableCards)
-# favorableOutcomesInStraightForUser = probability_of_missing_cards(missingCardsInStraightForUser, availableCards)
-# favorableOutcomesInThreeOfAKindForUser = probability_of_missing_cards(missingCardsInThreeOfAKindForUser, availableCards)
-# favorableOutcomesInTwoPairsForUser = probability_of_missing_cards(missingCardsInTwoPairsForUser, availableCards)
-# favorableOutcomesInOnePairForUser = probability_of_missing_cards(missingCardsInOnePairForUser, availableCards)
-#
-# favorableOutcomesInRoyalFlushForOpponent = probability_of_missing_cards(missingCardsInRoyalFlushForOpponent, cardsOnTheTable)
-# favorableOutcomesInStraightFlushForOpponent = probability_of_missing_cards(missingCardsInStraightFlushForOpponent, cardsOnTheTable)
-# favorableOutcomesInFourOfAKindForOpponent = probability_of_missing_cards(missingCardsInFourOfAKindForOpponent, cardsOnTheTable)
-# favorableOutcomesInFullHouseForOpponent = probability_of_missing_cards(missingCardsInFullHouseForOpponent, cardsOnTheTable)
-# favorableOutcomesInFlushForOpponent = probability_of_missing_cards(missingCardsInFlushForOpponent, cardsOnTheTable)
-# favorableOutcomesInStraightForOpponent = probability_of_missing_cards(missingCardsInStraightForOpponent, cardsOnTheTable)
-# favorableOutcomesInThreeOfAKindForOpponent = probability_of_missing_cards(missingCardsInThreeOfAKindForOpponent, cardsOnTheTable)
-# favorableOutcomesInTwoPairsForOpponent = probability_of_missing_cards(missingCardsInTwoPairsForOpponent, cardsOnTheTable)
-# favorableOutcomesInOnePairForOpponent = probability_of_missing_cards(missingCardsInOnePairForOpponent, cardsOnTheTable)
+favorableOutcomesInStraightFlushForUser = probability_of_missing_cards(missingCardsInStraightFlushForUser, availableCards)
+favorableOutcomesInFourOfAKindForUser = probability_of_missing_cards(missingCardsInFourOfAKindForUser, availableCards)
+favorableOutcomesInFullHouseForUser = probability_of_missing_cards(missingCardsInFullHouseForUser, availableCards)
+favorableOutcomesInFlushForUser = probability_of_missing_cards(missingCardsInFlushForUser, availableCards)
+favorableOutcomesInStraightForUser = probability_of_missing_cards(missingCardsInStraightForUser, availableCards)
+favorableOutcomesInThreeOfAKindForUser = probability_of_missing_cards(missingCardsInThreeOfAKindForUser, availableCards)
+favorableOutcomesInTwoPairsForUser = probability_of_missing_cards(missingCardsInTwoPairsForUser, availableCards)
+favorableOutcomesInOnePairForUser = probability_of_missing_cards(missingCardsInOnePairForUser, availableCards)
+
+favorableOutcomesInRoyalFlushForOpponent = probability_of_missing_cards(missingCardsInRoyalFlushForOpponent, cardsOnTheTable)
+favorableOutcomesInStraightFlushForOpponent = probability_of_missing_cards(missingCardsInStraightFlushForOpponent, cardsOnTheTable)
+favorableOutcomesInFourOfAKindForOpponent = probability_of_missing_cards(missingCardsInFourOfAKindForOpponent, cardsOnTheTable)
+favorableOutcomesInFullHouseForOpponent = probability_of_missing_cards(missingCardsInFullHouseForOpponent, cardsOnTheTable)
+favorableOutcomesInFlushForOpponent = probability_of_missing_cards(missingCardsInFlushForOpponent, cardsOnTheTable)
+favorableOutcomesInStraightForOpponent = probability_of_missing_cards(missingCardsInStraightForOpponent, cardsOnTheTable)
+favorableOutcomesInThreeOfAKindForOpponent = probability_of_missing_cards(missingCardsInThreeOfAKindForOpponent, cardsOnTheTable)
+favorableOutcomesInTwoPairsForOpponent = probability_of_missing_cards(missingCardsInTwoPairsForOpponent, cardsOnTheTable)
+favorableOutcomesInOnePairForOpponent = probability_of_missing_cards(missingCardsInOnePairForOpponent, cardsOnTheTable)
 
 
 def total_number_of_outcomes(allCards, availableCards):
@@ -162,23 +229,27 @@ def probability_of_the_combination(numberOfFavorableOutcomes, totalNumberOfOutco
 
 
 probabilityOfRoyalFlushForUser = probability_of_the_combination(favorableOutcomesInRoyalFlushForUser, totalNumberOfOutcomesForUser)
-# probabilityOfStraightFlushForUser = probability_of_the_combination(favorableOutcomesInStraightFlushForUser, totalNumberOfOutcomesForUser)
-# probabilityOfFourOfAKindForUser = probability_of_the_combination(favorableOutcomesInFourOfAKindForUser, totalNumberOfOutcomesForUser)
-# probabilityOfFullHouseForUser = probability_of_the_combination(favorableOutcomesInFullHouseForUser, totalNumberOfOutcomesForUser)
-# probabilityOfFlushForUser = probability_of_the_combination(favorableOutcomesInFlushForUser, totalNumberOfOutcomesForUser)
-# probabilityOfStraightForUser = probability_of_the_combination(favorableOutcomesInStraightForUser, totalNumberOfOutcomesForUser)
-# probabilityOfThreeOfAKindForUser = probability_of_the_combination(favorableOutcomesInThreeOfAKindForUser, totalNumberOfOutcomesForUser)
-# probabilityOfTwoPairsForUser = probability_of_the_combination(favorableOutcomesInTwoPairsForUser, totalNumberOfOutcomesForUser)
-# probabilityOfOnePairForUser = probability_of_the_combination(favorableOutcomesInOnePairForUser, totalNumberOfOutcomesForUser)
-#
-# probabilityOfRoyalFlushForOpponent = probability_of_the_combination(favorableOutcomesInRoyalFlushForOpponent, totalNumberOfOutcomesForOpponent)
-# probabilityOfStraightFlushForOpponent = probability_of_the_combination(favorableOutcomesInStraightFlushForOpponent, totalNumberOfOutcomesForOpponent)
-# probabilityOfFourOfAKindForOpponent = probability_of_the_combination(favorableOutcomesInFourOfAKindForOpponent, totalNumberOfOutcomesForOpponent)
-# probabilityOfFullHouseForOpponent = probability_of_the_combination(favorableOutcomesInFullHouseForOpponent, totalNumberOfOutcomesForOpponent)
-# probabilityOfFlushForOpponent = probability_of_the_combination(favorableOutcomesInFlushForOpponent, totalNumberOfOutcomesForOpponent)
-# probabilityOfStraightForOpponent = probability_of_the_combination(favorableOutcomesInStraightForOpponent, totalNumberOfOutcomesForOpponent)
-# probabilityOfThreeOfAKindForOpponent = probability_of_the_combination(favorableOutcomesInThreeOfAKindForOpponent, totalNumberOfOutcomesForOpponent)
-# probabilityOfTwoPairsForOpponent = probability_of_the_combination(favorableOutcomesInTwoPairsForOpponent, totalNumberOfOutcomesForOpponent)
-# probabilityOfOnePairForOpponent = probability_of_the_combination(favorableOutcomesInOnePairForOpponent, totalNumberOfOutcomesForOpponent)
+probabilityOfStraightFlushForUser = probability_of_the_combination(favorableOutcomesInStraightFlushForUser, totalNumberOfOutcomesForUser)
+probabilityOfFourOfAKindForUser = probability_of_the_combination(favorableOutcomesInFourOfAKindForUser, totalNumberOfOutcomesForUser)
+probabilityOfFullHouseForUser = probability_of_the_combination(favorableOutcomesInFullHouseForUser, totalNumberOfOutcomesForUser)
+probabilityOfFlushForUser = probability_of_the_combination(favorableOutcomesInFlushForUser, totalNumberOfOutcomesForUser)
+probabilityOfStraightForUser = probability_of_the_combination(favorableOutcomesInStraightForUser, totalNumberOfOutcomesForUser)
+probabilityOfThreeOfAKindForUser = probability_of_the_combination(favorableOutcomesInThreeOfAKindForUser, totalNumberOfOutcomesForUser)
+probabilityOfTwoPairsForUser = probability_of_the_combination(favorableOutcomesInTwoPairsForUser, totalNumberOfOutcomesForUser)
+probabilityOfOnePairForUser = probability_of_the_combination(favorableOutcomesInOnePairForUser, totalNumberOfOutcomesForUser)
 
-print(factorial(4))
+probabilityOfRoyalFlushForOpponent = probability_of_the_combination(favorableOutcomesInRoyalFlushForOpponent, totalNumberOfOutcomesForOpponent)
+probabilityOfStraightFlushForOpponent = probability_of_the_combination(favorableOutcomesInStraightFlushForOpponent, totalNumberOfOutcomesForOpponent)
+probabilityOfFourOfAKindForOpponent = probability_of_the_combination(favorableOutcomesInFourOfAKindForOpponent, totalNumberOfOutcomesForOpponent)
+probabilityOfFullHouseForOpponent = probability_of_the_combination(favorableOutcomesInFullHouseForOpponent, totalNumberOfOutcomesForOpponent)
+probabilityOfFlushForOpponent = probability_of_the_combination(favorableOutcomesInFlushForOpponent, totalNumberOfOutcomesForOpponent)
+probabilityOfStraightForOpponent = probability_of_the_combination(favorableOutcomesInStraightForOpponent, totalNumberOfOutcomesForOpponent)
+probabilityOfThreeOfAKindForOpponent = probability_of_the_combination(favorableOutcomesInThreeOfAKindForOpponent, totalNumberOfOutcomesForOpponent)
+probabilityOfTwoPairsForOpponent = probability_of_the_combination(favorableOutcomesInTwoPairsForOpponent, totalNumberOfOutcomesForOpponent)
+probabilityOfOnePairForOpponent = probability_of_the_combination(favorableOutcomesInOnePairForOpponent, totalNumberOfOutcomesForOpponent)
+# --------------------calculator--------------------
+
+
+# --------------------output--------------------
+
+# --------------------output--------------------
