@@ -65,10 +65,10 @@ quantityOfCardsToBeOnTheTable = int(input('How many cards MUST be on the table?'
 quantityOfCardsToBeAvailable = quantityOfCardsToBeOnHand + quantityOfCardsToBeOnTheTable
 
 quantityOfCardsOnHand = int(input('How many cards ARE on hand?'))
-cardsOnHand = [input('Input card on hand #{el}') for el in range(quantityOfCardsOnHand)]
+cardsOnHand = [input('Input card on hand #{}'.format(el)) for el in range(quantityOfCardsOnHand)]
 
 quantityOfCardsOnTheTable = int(input('How many cards ARE on the table?'))
-cardsOnTheTable = [input('Input card on the table #{el}') for el in range(quantityOfCardsOnTheTable)]
+cardsOnTheTable = [input('Input card on the table #{}'.format(el)) for el in range(quantityOfCardsOnTheTable)]
 
 availableCards = cardsOnHand + cardsOnTheTable
 # --------------------input--------------------
@@ -76,18 +76,8 @@ availableCards = cardsOnHand + cardsOnTheTable
 # --------------------calculator-------------------
 probability_of_a_combination = lambda allItems, selectedItems: factorial(allItems) / (factorial(selectedItems) * factorial(allItems - selectedItems))
 
-def missing_cards(availableCards, aCombination):
-    """
-    Creates a matrix where each list is a list of items that are missing for the particular combination.
-    """
-    missingCardsMatrix = []
-    for combinationList in aCombination:
-        missingCardsList = []
-        for card in combinationList:
-            if card not in availableCards:
-                missingCardsList.append(card)
-        missingCardsMatrix.append(missingCardsList)
-    return missingCardsMatrix
+sub_missing_cards = lambda availableCards, combinationList: [card for card in combinationList if card not in availableCards]
+missing_cards = lambda availableCards, aCombination: [sub_missing_cards(availableCards, combinationList) for combinationList in aCombination]
 
 missingCardsInRoyalFlushForUser = missing_cards(availableCards, royalFlush)
 missingCardsInStraightFlushForUser = missing_cards(availableCards, straightFlush)
