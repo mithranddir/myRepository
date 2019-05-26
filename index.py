@@ -1,4 +1,5 @@
 import itertools
+from math import factorial
 
 # --------------------combinations--------------------
 spades = ['as', 'ks', 'qs', 'js', '1s', '9s', '8s', '7s', '6s', '5s', '4s', '3s', '2s']
@@ -10,7 +11,6 @@ allCards = [spades + clubs + diamonds + hearts]
 suits = [spades, clubs, diamonds, hearts]
 ranks = [suit for suit in zip(spades, clubs, diamonds, hearts)]
 
-
 def straightFlush():
     result = []
     for suit in suits:
@@ -21,7 +21,6 @@ def straightFlush():
             ind1 += 1
             ind2 += 1
     return result
-
 
 def pairs(combinationLength):
     """
@@ -40,7 +39,6 @@ def pairs(combinationLength):
             listThree = suits[indexes[2]]
             result = result + [(index1, index2, index3) for index1, index2, index3 in zip(listOne, listTwo, listThree)]
     return result
-
 
 royalFlush = [theList[:5] for theList in suits]
 
@@ -61,7 +59,6 @@ fullHouse = [(aPair, aSet) for aPair in onePair for aSet in threeOfAKind]
 twoPairs = [(thePair, aPair) for thePair in onePair for aPair in onePair]
 # --------------------combinations--------------------
 
-
 # --------------------input--------------------
 quantityOfCardsToBeOnHand = int(input('How many cards MUST be on hand?'))
 quantityOfCardsToBeOnTheTable = int(input('How many cards MUST be on the table?'))
@@ -76,21 +73,8 @@ cardsOnTheTable = [input('Input card on the table #{el}') for el in range(quanti
 availableCards = cardsOnHand + cardsOnTheTable
 # --------------------input--------------------
 
-
 # --------------------calculator-------------------
-def factorial(n):
-    """
-    Calculates the factorial of a number.
-    """
-    rtn = 1
-    while n >= 1:
-        rtn = rtn * n
-        n -= 1
-    return rtn
-
-
 probability_of_a_combination = lambda allItems, selectedItems: factorial(allItems) / (factorial(selectedItems) * factorial(allItems - selectedItems))
-
 
 def missing_cards(availableCards, aCombination):
     """
@@ -104,7 +88,6 @@ def missing_cards(availableCards, aCombination):
                 missingCardsList.append(card)
         missingCardsMatrix.append(missingCardsList)
     return missingCardsMatrix
-
 
 missingCardsInRoyalFlushForUser = missing_cards(availableCards, royalFlush)
 missingCardsInStraightFlushForUser = missing_cards(availableCards, straightFlush)
@@ -125,7 +108,6 @@ missingCardsInStraightForOpponent = missing_cards(cardsOnTheTable, straight)
 missingCardsInThreeOfAKindForOpponent = missing_cards(cardsOnTheTable, threeOfAKind)
 missingCardsInTwoPairsForOpponent = missing_cards(cardsOnTheTable, twoPairs)
 missingCardsInOnePairForOpponent = missing_cards(cardsOnTheTable, onePair)
-
 
 def probability_of_missing_cards(missingCards, availableCards):
     """
@@ -156,7 +138,6 @@ def probability_of_missing_cards(missingCards, availableCards):
             allMissingCardsProbability = allMissingCardsProbability + theMissingCardsProbability
     return allMissingCardsProbability
 
-
 favorableOutcomesInRoyalFlushForUser = probability_of_missing_cards(missingCardsInRoyalFlushForUser, availableCards)
 favorableOutcomesInStraightFlushForUser = probability_of_missing_cards(missingCardsInStraightFlushForUser, availableCards)
 favorableOutcomesInFourOfAKindForUser = probability_of_missing_cards(missingCardsInFourOfAKindForUser, availableCards)
@@ -177,12 +158,10 @@ favorableOutcomesInThreeOfAKindForOpponent = probability_of_missing_cards(missin
 favorableOutcomesInTwoPairsForOpponent = probability_of_missing_cards(missingCardsInTwoPairsForOpponent, cardsOnTheTable)
 favorableOutcomesInOnePairForOpponent = probability_of_missing_cards(missingCardsInOnePairForOpponent, cardsOnTheTable)
 
-
 total_number_of_outcomes = lambda allCards, availableCards: probability_of_a_combination(len(allCards) - len(availableCards), quantityOfCardsToBeAvailable - len(availableCards))
 
 totalNumberOfOutcomesForUser = total_number_of_outcomes(allCards, availableCards)
 totalNumberOfOutcomesForOpponent = total_number_of_outcomes(allCards, cardsOnTheTable)
-
 
 def probability_of_the_combination(numberOfFavorableOutcomes, totalNumberOfOutcomes):
     """
@@ -195,7 +174,6 @@ def probability_of_the_combination(numberOfFavorableOutcomes, totalNumberOfOutco
     else:
         probabilityOfTheCombination = numberOfFavorableOutcomes / totalNumberOfOutcomes
     return probabilityOfTheCombination
-
 
 probabilityOfRoyalFlushForUser = probability_of_the_combination(favorableOutcomesInRoyalFlushForUser, totalNumberOfOutcomesForUser)
 probabilityOfStraightFlushForUser = probability_of_the_combination(favorableOutcomesInStraightFlushForUser, totalNumberOfOutcomesForUser)
@@ -217,8 +195,3 @@ probabilityOfThreeOfAKindForOpponent = probability_of_the_combination(favorableO
 probabilityOfTwoPairsForOpponent = probability_of_the_combination(favorableOutcomesInTwoPairsForOpponent, totalNumberOfOutcomesForOpponent)
 probabilityOfOnePairForOpponent = probability_of_the_combination(favorableOutcomesInOnePairForOpponent, totalNumberOfOutcomesForOpponent)
 # --------------------calculator--------------------
-
-
-# --------------------output--------------------
-
-# --------------------output--------------------
