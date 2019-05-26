@@ -1,11 +1,10 @@
 import itertools
 
-
 # --------------------combinations--------------------
-spades = ['as', 'ks', 'qs', 'js', '10s', '9s', '8s', '7s', '6s', '5s', '4s', '3s', '2s']
-clubs = ['ac', 'kc', 'qc', 'jc', '10c', '9c', '8c', '7c', '6c', '5c', '4c', '3c', '2c']
-diamonds = ['ad', 'kd', 'qd', 'jd', '10d', '9d', '8d', '7d', '6d', '5d', '4d', '3d', '2d']
-hearts = ['ah', 'kh', 'qh', 'jh', '10h', '9h', '8h', '7h', '6h', '5h', '4h', '3h', '2h']
+spades = ['as', 'ks', 'qs', 'js', '1s', '9s', '8s', '7s', '6s', '5s', '4s', '3s', '2s']
+clubs = ['ac', 'kc', 'qc', 'jc', '1c', '9c', '8c', '7c', '6c', '5c', '4c', '3c', '2c']
+diamonds = ['ad', 'kd', 'qd', 'jd', '1d', '9d', '8d', '7d', '6d', '5d', '4d', '3d', '2d']
+hearts = ['ah', 'kh', 'qh', 'jh', '1h', '9h', '8h', '7h', '6h', '5h', '4h', '3h', '2h']
 
 allCards = [spades + clubs + diamonds + hearts]
 suits = [spades, clubs, diamonds, hearts]
@@ -64,37 +63,16 @@ twoPairs = [(thePair, aPair) for thePair in onePair for aPair in onePair]
 
 
 # --------------------input--------------------
-quantityOfCardsToBeOnHand = input('How many cards MUST be on hand?')
-quantityOfCardsToBeOnTheTable = input('How many cards MUST be on the table?')
+quantityOfCardsToBeOnHand = int(input('How many cards MUST be on hand?'))
+quantityOfCardsToBeOnTheTable = int(input('How many cards MUST be on the table?'))
 quantityOfCardsToBeAvailable = quantityOfCardsToBeOnHand + quantityOfCardsToBeOnTheTable
 
+quantityOfCardsOnHand = int(input('How many cards ARE on hand?'))
+cardsOnHand = [input('Input card on hand #{el}') for el in range(quantityOfCardsOnHand)]
 
-def cards_on_hand():
-    """
-    Creates a list of cards that are on hand.
-    """
-    cardsOnHand = []
-    quantityOfCardsOnHand = input('How many cards ARE on hand?')
-    for el in xrange(quantityOfCardsOnHand):
-        card = raw_input('Input card on hand #{}'.format(el))
-        cardsOnHand.append(card)
-    return cardsOnHand
+quantityOfCardsOnTheTable = int(input('How many cards ARE on the table?'))
+cardsOnTheTable = [input('Input card on the table #{el}') for el in range(quantityOfCardsOnTheTable)]
 
-
-def cards_on_the_table():
-    """
-    Creates a list of cards that are on the table.
-    """
-    cardsOnTheTable = []
-    quantityOfCardsOnTheTable = input('How many cards ARE on the table?')
-    for el in xrange(quantityOfCardsOnTheTable):
-        card = raw_input('Input card on the table #{}'.format(el))
-        cardsOnTheTable.append(card)
-    return cardsOnTheTable
-
-
-cardsOnHand = cards_on_hand()
-cardsOnTheTable = cards_on_the_table()
 availableCards = cardsOnHand + cardsOnTheTable
 # --------------------input--------------------
 
@@ -107,7 +85,7 @@ def factorial(n):
     rtn = 1
     while n >= 1:
         rtn = rtn * n
-        n = n - 1
+        n -= 1
     return rtn
 
 
