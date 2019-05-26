@@ -77,7 +77,7 @@ availableCards = cardsOnHand + cardsOnTheTable
 # --------------------input--------------------
 
 
-# --------------------calculator--------------------
+# --------------------calculator-------------------
 def factorial(n):
     """
     Calculates the factorial of a number.
@@ -89,11 +89,7 @@ def factorial(n):
     return rtn
 
 
-def probability_of_a_combination(allItems, selectedItems):
-    """
-    Calculates the probability of a combination.
-    """
-    return factorial(allItems) / (factorial(selectedItems) * factorial(allItems - selectedItems))
+probability_of_a_combination = lambda allItems, selectedItems: factorial(allItems) / (factorial(selectedItems) * factorial(allItems - selectedItems))
 
 
 def missing_cards(availableCards, aCombination):
@@ -182,12 +178,7 @@ favorableOutcomesInTwoPairsForOpponent = probability_of_missing_cards(missingCar
 favorableOutcomesInOnePairForOpponent = probability_of_missing_cards(missingCardsInOnePairForOpponent, cardsOnTheTable)
 
 
-def total_number_of_outcomes(allCards, availableCards):
-    """
-    Calculates probability of selecting missing cards out of all cards.
-    """
-    return probability_of_a_combination(len(allCards) - len(availableCards), quantityOfCardsToBeAvailable - len(availableCards))
-
+total_number_of_outcomes = lambda allCards, availableCards: probability_of_a_combination(len(allCards) - len(availableCards), quantityOfCardsToBeAvailable - len(availableCards))
 
 totalNumberOfOutcomesForUser = total_number_of_outcomes(allCards, availableCards)
 totalNumberOfOutcomesForOpponent = total_number_of_outcomes(allCards, cardsOnTheTable)
